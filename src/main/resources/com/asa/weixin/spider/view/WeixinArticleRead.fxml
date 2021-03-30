@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane fx:id="articleReadBox" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.asa.weixin.spider.controller.WeixinArticleReadController">
+   <center>
+      <WebView fx:id="webContainer" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="25.0">
+               <children>
+                  <Button fx:id="back" mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="clickButton" />
+                        <String fx:value="commonButton" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="pageHome" layoutX="10.0" layoutY="10.0" mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="clickButton" />
+                        <String fx:value="commonButton" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/list.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="snapshot" layoutX="53.0" layoutY="10.0" mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="clickButton" />
+                        <String fx:value="commonButton" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/snapshot.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="forward" layoutX="10.0" layoutY="10.0" mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="clickButton" />
+                        <String fx:value="commonButton" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
+                           <image>
+                              <Image url="@../img/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@../css/WebViewCommon.css" />
+      <URL value="@../css/CommonStyle.css" />
+   </stylesheets>
+</BorderPane>

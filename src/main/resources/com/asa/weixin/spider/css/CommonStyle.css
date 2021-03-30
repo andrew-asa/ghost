@@ -1,0 +1,19 @@
+.verdana18{
+    -fx-font-family: verdana;
+    -fx-font-size: 18px;
+}
+
+.commonButton {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+}
+
+
+.clickButton:hover {
+    -fx-opacity: 0.5;
+}
+
+.clickButton:pressed{
+    -fx-opacity: 0.25;
+}

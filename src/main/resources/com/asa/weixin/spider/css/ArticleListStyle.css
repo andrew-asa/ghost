@@ -1,0 +1,15 @@
+.searchBox, .searchBox:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-border-color: #dadada;
+    -fx-accent: rgb(52, 109, 207);
+    -fx-padding: 0 5 0 5;
+}
+
+.unFavorFill{
+    -fx-fill: #8a8a8a;
+}
+
+.favorFill{
+    -fx-fill: #dd2020;
+}
