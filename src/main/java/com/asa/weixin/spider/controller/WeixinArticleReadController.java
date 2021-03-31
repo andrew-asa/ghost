@@ -5,26 +5,27 @@ import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.ListUtils;
+import com.asa.weixin.spider.Spider;
 import com.asa.weixin.spider.model.WeixinArticle;
+import com.asa.weixin.spider.service.pdf.HtmlToPdfService;
 import com.asa.weixin.spider.view.ArticleListPaneView;
 import com.asa.weixin.spider.view.WeixinArticleReadView;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 /**
  * @author andrew_asa
@@ -47,9 +48,12 @@ public class WeixinArticleReadController implements Initializable {
     private Button pageHome;
 
     @FXML
-    private Button snapshot;
+    private Button pdfConverter;
 
     private WebEngine webEngine;
+
+    @Autowired
+    private HtmlToPdfService htmlToPdfService;
 
     public enum WeixinArticleReadEvent implements Event<WeixinArticle> {
 
@@ -71,7 +75,7 @@ public class WeixinArticleReadController implements Initializable {
     private void initButtonAction() {
         initBackButton();
         initPageHomeButton();
-        initSnapshotButton();
+        initPdfConverterButton();
         initForwardButton();
     }
 
@@ -90,19 +94,22 @@ public class WeixinArticleReadController implements Initializable {
         pageHome.setOnMouseClicked(e-> pageHome());
         pageHome.setTooltip(new Tooltip("返回文章列表"));
     }
-    private void initSnapshotButton() {
-        snapshot.setOnMouseClicked(e->snapshot());
-        snapshot.setTooltip(new Tooltip("文章截图"));
+    private void initPdfConverterButton() {
+        pdfConverter.setOnMouseClicked(e-> pdfConverter());
+        pdfConverter.setTooltip(new Tooltip("导出为pdf"));
     }
 
-    public void snapshot() {
+    public void pdfConverter() {
         //Printer.getAllPrinters();
-        LoggerFactory.getLogger().debug("snapshot");
-
-        PrinterJob job = PrinterJob.createPrinterJob();
-        if (job != null) {
-            webEngine.print(job);
-            job.endJob();
+        LoggerFactory.getLogger().debug("pdfConverter");
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF File (*.pdf)", "*.pdf");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showSaveDialog(Spider.getStage());
+        try {
+            htmlToPdfService.convert(webEngine.getLocation(),file.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
