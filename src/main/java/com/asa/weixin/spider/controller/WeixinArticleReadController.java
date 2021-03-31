@@ -13,12 +13,15 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -93,7 +96,14 @@ public class WeixinArticleReadController implements Initializable {
     }
 
     public void snapshot() {
+        //Printer.getAllPrinters();
+        LoggerFactory.getLogger().debug("snapshot");
 
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job != null) {
+            webEngine.print(job);
+            job.endJob();
+        }
     }
 
     public void forward() {

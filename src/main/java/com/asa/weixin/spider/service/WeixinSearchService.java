@@ -57,6 +57,7 @@ public class WeixinSearchService {
 
     /**
      * 获取第 n 页文章
+     *
      * @param weixinPublicAccount
      * @param keyword
      * @param page
@@ -85,17 +86,17 @@ public class WeixinSearchService {
         if (lastIndex > resultIndex) {
             // 坑爹的腾讯能确保有5条记录，但是无法确保每次一样 ++++
             if (resultCount >= 5) {
-                resultIndex = resultIndex -(resultCount-5);
+                resultIndex = resultIndex - (resultCount - 5);
                 weixinArticlesInfo.setArticles(weixinArticlesInfo.getArticles().subList(0, 5));
             }
             int les = lastIndex - resultIndex;
             startIndex = startIndex + 5;
             WeixinArticlesInfo ex = searchArticle(weixinPublicAccount, startIndex, pageCount);
-            List<WeixinArticle> ar =  ex.getArticles();
+            List<WeixinArticle> ar = ex.getArticles();
             int exLent = ListUtils.length(ar);
-            if (exLent >0) {
+            if (exLent > 0) {
                 int ti = Math.min(les, exLent);
-                weixinArticlesInfo.addArticles(ar.subList(0,ti));
+                weixinArticlesInfo.addArticles(ar.subList(0, ti));
             }
         }
         return weixinArticlesInfo;
@@ -104,16 +105,18 @@ public class WeixinSearchService {
 
     /**
      * 搜索公众号文章
+     *
      * @param account
      * @return
      */
     public WeixinArticlesInfo searchArticle(WeixinPublicAccount account) {
 
-        return searchArticle(account,0,5);
+        return searchArticle(account, 0, 5);
     }
 
     /**
      * 搜索公众号文章
+     *
      * @param account
      * @param begin
      * @param count
@@ -122,7 +125,7 @@ public class WeixinSearchService {
     public WeixinArticlesInfo searchArticle(WeixinPublicAccount account,
                                             int begin, int count) {
 
-        return searchArticle(account, StringUtils.EMPTY,begin, count);
+        return searchArticle(account, StringUtils.EMPTY, begin, count);
     }
 
     public WeixinArticlesInfo searchArticle(WeixinPublicAccount account,
@@ -131,13 +134,14 @@ public class WeixinSearchService {
 
         return searchArticle(loginService.getToken(),
                              loginService.getCookieString(),
-                             account,query,
-                             begin,count);
+                             account, query,
+                             begin, count);
     }
 
 
     /**
      * 搜索公众号文章
+     *
      * @param token
      * @param cookie
      * @param account
@@ -152,15 +156,16 @@ public class WeixinSearchService {
                                             int begin,
                                             int count) {
 
-        return searchArticle(token,cookie,account.getFakeId(),
+        return searchArticle(token, cookie, account.getFakeId(),
                              query,
-                             begin,count);
+                             begin, count);
     }
 
     public WeixinArticlesInfo searchArticle(String token, String cookie,
                                             String fakeId,
                                             String query,
-                                            int begin,int count) {
+                                            int begin, int count) {
+
         Map<String, Object> params = new MapBuilder()
                 .add("action", "list_ex")
                 .add("begin", begin)
@@ -185,24 +190,51 @@ public class WeixinSearchService {
         return parseSearchArticleResult(body);
     }
 
-    public WeixinArticlesInfo parseSearchArticleResult(Map body){
+    /**
+     * session 过期了，重新获取
+     */
+    private void newLogin() {
+
+        loginService.newLogin();
+    }
+
+    private boolean invalidSession(Map body) {
+
+        if (MapUtils.containsKey(body, "base_resp")) {
+            Object baseResp = MapUtils.get(body, "base_resp");
+            if (baseResp instanceof Map) {
+                Object v = MapUtils.get((Map) baseResp, "ret");
+                if (v instanceof Integer && (Integer) v == 200003) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public WeixinArticlesInfo parseSearchArticleResult(Map body) {
+
         WeixinArticlesInfo ret = new WeixinArticlesInfo();
         if (body != null) {
-            int msgCount =(int)MapUtils.get(body, "app_msg_cnt");
+            if (invalidSession(body)) {
+                newLogin();
+                return ret;
+            }
+            int msgCount = (int) MapUtils.get(body, "app_msg_cnt");
             ret.setArticleTotalCount(msgCount);
-            List<Map<String,Object>> list = (List<Map<String, Object>>) MapUtils.get(body, "app_msg_list");
+            List<Map<String, Object>> list = (List<Map<String, Object>>) MapUtils.get(body, "app_msg_list");
             if (ListUtils.isNotEmpty(list)) {
-                list.forEach(item->{
+                list.forEach(item -> {
                     WeixinArticle article = new WeixinArticle();
                     article.setAid((String) item.get("aid"));
                     article.setCover((String) item.get("cover"));
                     article.setTitle((String) item.get("title"));
                     article.setLink((String) item.get("link"));
                     article.setDigest((String) item.get("digest"));
-                    article.setUpdate_time(MapUtils.getInteger(item,"update_time"));
-                    article.setUpdate_time(MapUtils.getInteger(item,"update_time"));
+                    article.setUpdate_time(MapUtils.getInteger(item, "update_time"));
+                    article.setUpdate_time(MapUtils.getInteger(item, "update_time"));
                     // 带有关键字搜索的时候这个字段不一定有
-                    article.setCopyright_type(MapUtils.getInteger(item,"copyright_type"));
+                    article.setCopyright_type(MapUtils.getInteger(item, "copyright_type"));
                     ret.addArticle(article);
                 });
             }
@@ -219,7 +251,7 @@ public class WeixinSearchService {
     public List<WeixinPublicAccount> searchPublicAccount(String keyword) {
 
 
-        return searchPublicAccount(keyword,loginService.getToken(),loginService.getCookieString());
+        return searchPublicAccount(keyword, loginService.getToken(), loginService.getCookieString());
     }
 
     public List<WeixinPublicAccount> searchPublicAccount(String keyword,
@@ -234,7 +266,8 @@ public class WeixinSearchService {
                                                          String token,
                                                          String cookie,
                                                          int begin,
-                                                         int count){
+                                                         int count) {
+
         Map<String, Object> params = new MapBuilder()
                 .add("action", "search_biz")
                 .add("begin", begin)
@@ -257,26 +290,26 @@ public class WeixinSearchService {
         return parseSearchPublicAccountResult(body);
     }
 
-    public List<WeixinPublicAccount> parseSearchPublicAccountResult(Map body){
+    public List<WeixinPublicAccount> parseSearchPublicAccountResult(Map body) {
+
         List<WeixinPublicAccount> ret = new ArrayList<>();
         if (MapUtils.isNotEmptyMap(body)) {
-            List<Map<String,Object>> list = (List<Map<String,Object>>) MapUtils.get(body, "list");
+            List<Map<String, Object>> list = (List<Map<String, Object>>) MapUtils.get(body, "list");
             if (ListUtils.isNotEmpty(list)) {
-                list.forEach(item ->{
+                list.forEach(item -> {
                     WeixinPublicAccount account = new WeixinPublicAccount();
                     account.setAlias((String) MapUtils.get(item, "alias"));
-                    account.setFakeId((String)MapUtils.get(item, "fakeid"));
-                    account.setNickName((String)MapUtils.get(item, "nickname"));
-                    account.setRoundHeadImg((String)MapUtils.get(item, "round_head_img"));
+                    account.setFakeId((String) MapUtils.get(item, "fakeid"));
+                    account.setNickName((String) MapUtils.get(item, "nickname"));
+                    account.setRoundHeadImg((String) MapUtils.get(item, "round_head_img"));
                     account.setServiceType(item.get("service_type").toString());
-                    account.setSignature((String)MapUtils.get(item, "signature"));
+                    account.setSignature((String) MapUtils.get(item, "signature"));
                     ret.add(account);
                 });
             }
         }
         return ret;
     }
-
 
 
     public List<WeixinPublicAccount> getCommonUsedAccount() {

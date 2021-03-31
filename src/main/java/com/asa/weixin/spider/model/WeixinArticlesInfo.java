@@ -14,6 +14,11 @@ public class WeixinArticlesInfo {
     private List<WeixinArticle> articles;
     private int articleTotalCount;
 
+    public WeixinArticlesInfo() {
+
+        this.articles = new ArrayList<>();
+    }
+
     public List<WeixinArticle> getArticles() {
 
         return articles;

@@ -84,13 +84,19 @@ public class WeixinLoginService {
 
         fromCacheCookies = readCookieFromPath();
         if (!fromCacheCookies) {
-            new Thread(() -> {
-                startDriver();
-            }).start();
+            newLogin();
         } else {
             login = true;
         }
     }
+
+    public void newLogin() {
+        new Thread(() -> {
+            startDriver();
+        }).start();
+    }
+
+
 
     @PreDestroy
     public void destroy() {
@@ -133,7 +139,9 @@ public class WeixinLoginService {
                 System.out.println("===== 成功超时======");
             }
         } catch (Exception e) {
-
+            LoggerFactory.getLogger().error(e,"error startDriver");
+        }finally {
+            browser.close();
         }
     }
 
