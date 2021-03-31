@@ -3,6 +3,7 @@ package com.asa.weixin.spider.service;
 import com.asa.utils.ListUtils;
 import com.asa.utils.MapBuilder;
 import com.asa.utils.MapUtils;
+import com.asa.utils.StringUtils;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.model.WeixinArticlesInfo;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
@@ -39,6 +40,67 @@ public class WeixinSearchService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * 每页显示多少条数据
+     */
+    public int pageCount = 10;
+
+    public int getPageCount() {
+
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+
+        this.pageCount = pageCount;
+    }
+
+    /**
+     * 获取第 n 页文章
+     * @param weixinPublicAccount
+     * @param keyword
+     * @param page
+     * @return
+     */
+    public WeixinArticlesInfo searchPageArticles(WeixinPublicAccount weixinPublicAccount, String keyword, int page) {
+
+        int startIndex = (page - 1) * pageCount;
+        int lastIndex = startIndex + pageCount - 1;
+        WeixinArticlesInfo weixinArticlesInfo = searchArticle(weixinPublicAccount, keyword, startIndex, pageCount);
+        int totalCount = weixinArticlesInfo.getArticleTotalCount();
+        int resultCount = ListUtils.length(weixinArticlesInfo.getArticles());
+        int resultIndex = startIndex + resultCount - 1;
+        // 一次中
+        if (lastIndex == resultIndex) {
+            return weixinArticlesInfo;
+        }
+        // 直接去最小，确保不越界
+        lastIndex = Math.min(lastIndex, totalCount - 1);
+        // 多了
+        if (lastIndex < resultIndex) {
+            // 截取一页直接返回
+            weixinArticlesInfo.setArticles(weixinArticlesInfo.getArticles().subList(0, pageCount));
+        }
+        // 少了,只再试一次，其它不管
+        if (lastIndex > resultIndex) {
+            // 坑爹的腾讯能确保有5条记录，但是无法确保每次一样 ++++
+            if (resultCount >= 5) {
+                resultIndex = resultIndex -(resultCount-5);
+                weixinArticlesInfo.setArticles(weixinArticlesInfo.getArticles().subList(0, 5));
+            }
+            int les = lastIndex - resultIndex;
+            startIndex = startIndex + 5;
+            WeixinArticlesInfo ex = searchArticle(weixinPublicAccount, startIndex, pageCount);
+            List<WeixinArticle> ar =  ex.getArticles();
+            int exLent = ListUtils.length(ar);
+            if (exLent >0) {
+                int ti = Math.min(les, exLent);
+                weixinArticlesInfo.addArticles(ar.subList(0,ti));
+            }
+        }
+        return weixinArticlesInfo;
+    }
+
 
     /**
      * 搜索公众号文章
@@ -57,11 +119,20 @@ public class WeixinSearchService {
      * @param count
      * @return
      */
-    public WeixinArticlesInfo searchArticle(WeixinPublicAccount account, int begin, int count) {
+    public WeixinArticlesInfo searchArticle(WeixinPublicAccount account,
+                                            int begin, int count) {
+
+        return searchArticle(account, StringUtils.EMPTY,begin, count);
+    }
+
+    public WeixinArticlesInfo searchArticle(WeixinPublicAccount account,
+                                            String query,
+                                            int begin, int count) {
 
         return searchArticle(loginService.getToken(),
                              loginService.getCookieString(),
-                             account,begin,count);
+                             account,query,
+                             begin,count);
     }
 
 
@@ -77,15 +148,17 @@ public class WeixinSearchService {
     public WeixinArticlesInfo searchArticle(String token,
                                             String cookie,
                                             WeixinPublicAccount account,
+                                            String query,
                                             int begin,
                                             int count) {
 
         return searchArticle(token,cookie,account.getFakeId(),
-                             "",
+                             query,
                              begin,count);
     }
 
-    public WeixinArticlesInfo searchArticle(String token, String cookie,String fakeId,
+    public WeixinArticlesInfo searchArticle(String token, String cookie,
+                                            String fakeId,
                                             String query,
                                             int begin,int count) {
         Map<String, Object> params = new MapBuilder()
@@ -126,9 +199,10 @@ public class WeixinSearchService {
                     article.setTitle((String) item.get("title"));
                     article.setLink((String) item.get("link"));
                     article.setDigest((String) item.get("digest"));
-                    article.setUpdate_time((Integer) item.get("update_time"));
-                    article.setCreate_time((Integer) item.get("create_time"));
-                    article.setCopyright_type((int) item.get("copyright_type"));
+                    article.setUpdate_time(MapUtils.getInteger(item,"update_time"));
+                    article.setUpdate_time(MapUtils.getInteger(item,"update_time"));
+                    // 带有关键字搜索的时候这个字段不一定有
+                    article.setCopyright_type(MapUtils.getInteger(item,"copyright_type"));
                     ret.addArticle(article);
                 });
             }

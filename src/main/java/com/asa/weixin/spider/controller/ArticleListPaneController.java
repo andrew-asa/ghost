@@ -23,7 +23,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollToEvent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -44,8 +43,6 @@ import javafx.scene.shape.SVGPath;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -122,12 +119,17 @@ public class ArticleListPaneController implements Initializable {
     @Autowired
     private WeixinFavorAccountsService favorAccountsService;
 
+    /**
+     * 当前显示账号
+     */
     private WeixinPublicAccount currentShowAccount;
 
     /**
-     * 每页显示多少条数据
+     * 搜索关键字
      */
-    public int pageShowCount = 10;
+    private String keyword;
+
+
 
     public enum ArticleListEvent implements Event<WeixinPublicAccount> {
         /**
@@ -162,10 +164,15 @@ public class ArticleListPaneController implements Initializable {
 
     public void show(WeixinPublicAccount weixinPublicAccount) {
 
+        show(weixinPublicAccount,StringUtils.EMPTY);
+    }
+
+    public void show(WeixinPublicAccount weixinPublicAccount,String keyword) {
+        this.keyword = keyword;
         currentShowAccount = weixinPublicAccount;
         showBriefIntroduction(weixinPublicAccount);
         stopShowLastAccountWork();
-        startShowCurrentAccountWork(weixinPublicAccount);
+        startShowCurrentAccountWork(weixinPublicAccount,keyword);
     }
 
     private void showBriefIntroduction(WeixinPublicAccount weixinPublicAccount) {
@@ -220,9 +227,9 @@ public class ArticleListPaneController implements Initializable {
     }
 
 
-    private void startShowCurrentAccountWork(WeixinPublicAccount weixinPublicAccount) {
+    private void startShowCurrentAccountWork(WeixinPublicAccount weixinPublicAccount,String keyword) {
 
-        WeixinArticlesInfo weixinArticlesInfo = searchArticles(weixinPublicAccount, 1);
+        WeixinArticlesInfo weixinArticlesInfo = searchService.searchPageArticles(weixinPublicAccount, keyword, 1);
         int totalCount = weixinArticlesInfo.getArticleTotalCount();
         Platform.runLater(() -> {
             customIsFavor(weixinPublicAccount);
@@ -238,7 +245,7 @@ public class ArticleListPaneController implements Initializable {
     }
 
     private void showPageBox(int totalCount) {
-
+        int pageShowCount = searchService.getPageCount();
         if (totalCount > pageShowCount) {
             pageBox.setVisible(true);
             int p = totalCount / pageShowCount;
@@ -246,44 +253,7 @@ public class ArticleListPaneController implements Initializable {
         }
     }
 
-    private WeixinArticlesInfo searchArticles(WeixinPublicAccount weixinPublicAccount, int page) {
 
-        int startIndex = (page - 1) * pageShowCount;
-        int lastIndex = startIndex + pageShowCount - 1;
-        WeixinArticlesInfo weixinArticlesInfo = searchService.searchArticle(weixinPublicAccount, startIndex, pageShowCount);
-        int totalCount = weixinArticlesInfo.getArticleTotalCount();
-        int resultCount = ListUtils.length(weixinArticlesInfo.getArticles());
-        int resultIndex = startIndex + resultCount - 1;
-        // 一次中
-        if (lastIndex == resultIndex) {
-            return weixinArticlesInfo;
-        }
-        // 直接去最小，确保不越界
-        lastIndex = Math.min(lastIndex, totalCount - 1);
-        // 多了
-        if (lastIndex < resultIndex) {
-            // 截取一页直接返回
-            weixinArticlesInfo.setArticles(weixinArticlesInfo.getArticles().subList(0, pageShowCount));
-        }
-        // 少了,只再试一次，其它不管
-        if (lastIndex > resultIndex) {
-            // 坑爹的腾讯能确保有5条记录，但是无法确保每次一样 ++++
-            if (resultCount >= 5) {
-                resultIndex = resultIndex -(resultCount-5);
-                weixinArticlesInfo.setArticles(weixinArticlesInfo.getArticles().subList(0, 5));
-            }
-            int les = lastIndex - resultIndex;
-            startIndex = startIndex + 5;
-            WeixinArticlesInfo ex = searchService.searchArticle(weixinPublicAccount, startIndex, pageShowCount);
-            List<WeixinArticle> ar =  ex.getArticles();
-            int exLent = ListUtils.length(ar);
-            if (exLent >0) {
-                int ti = Math.min(les, exLent);
-                weixinArticlesInfo.addArticles(ar.subList(0,ti));
-            }
-        }
-        return weixinArticlesInfo;
-    }
 
 
     private void iniTableView() {
@@ -339,6 +309,7 @@ public class ArticleListPaneController implements Initializable {
                 if (clearSearch.isVisible()) {
                     hideClearSearch();
                     clearSearchText();
+                    show(currentShowAccount);
                 }
             }
         });
@@ -360,6 +331,7 @@ public class ArticleListPaneController implements Initializable {
                     String text = searchField.getText();
                     if (StringUtils.isNotEmpty(text)) {
                         LoggerFactory.getLogger().debug("search {}", text);
+                        show(currentShowAccount,text);
                     }
                 }
             }
@@ -423,7 +395,7 @@ public class ArticleListPaneController implements Initializable {
     }
 
     private void jumpToPage(int pageIndex) {
-        WeixinArticlesInfo weixinArticlesInfo = searchArticles(currentShowAccount, pageIndex);
+        WeixinArticlesInfo weixinArticlesInfo = searchService.searchPageArticles(currentShowAccount, keyword, pageIndex);
         showTable(pageIndex,weixinArticlesInfo);
     }
 
