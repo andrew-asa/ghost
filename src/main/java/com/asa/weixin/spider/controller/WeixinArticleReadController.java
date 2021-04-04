@@ -5,15 +5,18 @@ import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.ListUtils;
+import com.asa.utils.StringUtils;
 import com.asa.weixin.spider.Spider;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.service.pdf.HtmlToPdfService;
+import com.asa.weixin.spider.ui.component.Toast;
 import com.asa.weixin.spider.view.ArticleListPaneView;
 import com.asa.weixin.spider.view.WeixinArticleReadView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -54,6 +57,8 @@ public class WeixinArticleReadController implements Initializable {
 
     @Autowired
     private HtmlToPdfService htmlToPdfService;
+
+    private WeixinArticle weixinArticle;
 
     public enum WeixinArticleReadEvent implements Event<WeixinArticle> {
 
@@ -100,17 +105,37 @@ public class WeixinArticleReadController implements Initializable {
     }
 
     public void pdfConverter() {
-        //Printer.getAllPrinters();
         LoggerFactory.getLogger().debug("pdfConverter");
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF File (*.pdf)", "*.pdf");
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showSaveDialog(Spider.getStage());
         try {
-            htmlToPdfService.convert(webEngine.getLocation(),file.getAbsolutePath());
+            Printer printer = findPdfWriterPrint();
+            if (printer == null) {
+                Toast.makeText("请先安装pdfwriterformac").showOnRight(pdfConverter);
+            } else {
+                PrinterJob job = PrinterJob.createPrinterJob(printer);
+                //job.showPageSetupDialog(Spider.getStage());
+                job.showPrintDialog(Spider.getStage());
+                job.getJobSettings().setJobName(weixinArticle.getTitle());
+                //job.;
+                if (job != null) {
+                    webEngine.print(job);
+                    job.endJob();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Printer findPdfWriterPrint() {
+        Printer[] printers =  Printer.getAllPrinters().toArray(new Printer[0]);
+        if (printers != null) {
+            for (Printer printer : printers) {
+                if (StringUtils.equalsIgnoreCase(printer.getName(),"pdfwriter")) {
+                    return printer;
+                }
+            }
+        }
+        return null;
     }
 
     public void forward() {
@@ -161,6 +186,7 @@ public class WeixinArticleReadController implements Initializable {
             @Override
             public void on(Event event, WeixinArticle param) {
                 EventDispatcher.fire(HomePageSubPanelEvent.REQUIRE_INSTALL, WeixinArticleReadView.NAME);
+                weixinArticle = param;
                 webEngine.load(param.getLink());
             }
         });

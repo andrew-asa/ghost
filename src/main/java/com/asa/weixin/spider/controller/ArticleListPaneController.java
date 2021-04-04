@@ -14,6 +14,7 @@ import com.asa.weixin.spider.service.WeixinFavorAccountsService;
 import com.asa.weixin.spider.service.WeixinSearchService;
 import com.asa.weixin.spider.ui.component.Toast;
 import com.asa.weixin.spider.view.ArticleListPaneView;
+import com.asa.weixin.spider.view.FavorAccountsView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -93,6 +94,9 @@ public class ArticleListPaneController implements Initializable {
 
     @FXML
     private VBox pageBox;
+
+    @FXML
+    private Button backToFavorList;
 
     @FXML
     private Button lastPage;
@@ -253,9 +257,6 @@ public class ArticleListPaneController implements Initializable {
         }
     }
 
-
-
-
     private void iniTableView() {
 
         settingTableView();
@@ -358,9 +359,13 @@ public class ArticleListPaneController implements Initializable {
 
     private void settingPageBox() {
 
+        lastPage.setTooltip(new Tooltip("上一页"));
         lastPage.setOnMouseClicked(e -> lastPage());
+        nextPage.setTooltip(new Tooltip("下一页"));
         nextPage.setOnMouseClicked(e -> nextPage());
         jumpToPage.setOnMouseClicked(e -> jumpToPage());
+        backToFavorList.setTooltip(new Tooltip("返回收藏页"));
+        backToFavorList.setOnMouseClicked(e -> backToFavorList());
         jumpToPageNumber.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
                 jumpToPage();
@@ -375,6 +380,11 @@ public class ArticleListPaneController implements Initializable {
     private int getTotalPageIndex() {
 
         return Integer.parseInt(totalPageNumber.getText());
+    }
+
+
+    public void backToFavorList() {
+        EventDispatcher.asyncFire(HomePageSubPanelEvent.REQUIRE_INSTALL, FavorAccountsView.NAME);
     }
 
     public void lastPage() {

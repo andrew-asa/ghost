@@ -18,5 +18,12 @@
 </p>
 
 ## 相关界面
+
+
+## 依赖安装
+###1: chromedriver+selenium+chrome 自动化登录微信获取cookie
+###1.1: [selenium](https://www.selenium.dev/documentation/en/)
+###2: [pdfwriterformac](https://www.jianshu.com/p/55633dae3ec3)
+
  
 

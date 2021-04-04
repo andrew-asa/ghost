@@ -156,6 +156,26 @@
                      <children>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
+                              <HBox alignment="BOTTOM_RIGHT" layoutX="351.0" layoutY="10.0">
+                                 <children>
+                                    <Button fx:id="backToFavorList" mnemonicParsing="false" prefHeight="30.0" prefWidth="25.0" style="-fx-background-color: #dddddd;">
+                                       <graphic>
+                                          <Pane prefHeight="25.0" prefWidth="25.0">
+                                             <children>
+                                                <SVGPath content="m 482.65387,421.64969 c -2.7761,-54.77434 -22.40499,-100.0294 -58.41815,-134.68497 -33.66046,-32.39156 -82.56149,-54.8846 -140.83633,-64.78057 -30.9403,-5.25414 -32.39343,-5.32099 -125.42102,-5.76957 l -87.498971,-0.42193 2.65853,2.81458 c 1.46219,1.54803 27.885121,29.36459 58.717631,61.81459 l 56.0591,59 -8.19658,8.25 c -4.50812,4.5375 -8.49735,8.25 -8.86495,8.25 -0.3676,0 -23.97605,-23.9625 -52.46321,-53.25 -28.487171,-29.2875 -59.509101,-61.125 -68.937631,-70.75 -9.42853,-9.625 -19.49568,-20.04826 -22.37144,-23.16279 l -5.22867,-5.66279 71.68825,-75.83722 C 132.96897,85.748557 166.52485,50.277747 168.10905,48.635 l 2.88038,-2.986813 8.62358,8.623583 8.62358,8.623583 -58.66278,63.863227 -58.662791,63.86323 81.283161,0.60344 c 79.83245,0.59267 91.09992,1.01878 118.06374,4.46494 61.22181,7.82452 113.11039,27.38651 153.16292,57.74238 10.68622,8.0991 28.1343,25.14414 36.53315,35.68925 28.7314,36.07351 44.65585,80.62297 46.73731,130.75 l 0.59172,14.25 H 495.2845 483.28598 Z" layoutX="-261.0" layoutY="-229.0" scaleX="0.04" scaleY="0.04" />
+                                             </children>
+                                          </Pane>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="15.0" top="10.0" />
+                                       </HBox.margin>
+                                       <styleClass>
+                                          <String fx:value="commonButton" />
+                                          <String fx:value="clickButton" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                              </HBox>
                               <HBox alignment="BOTTOM_RIGHT" layoutX="460.0" layoutY="10.0">
                                  <children>
                                     <Button fx:id="lastPage" mnemonicParsing="false" prefHeight="30.0" prefWidth="25.0" style="-fx-background-color: #dddddd;">

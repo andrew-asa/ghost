@@ -31,25 +31,32 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Time: 23:35
  */
 public class Toast extends Popup {
+
     private static final Logger log = LoggerFactory.getLogger(Toast.class);
 
     private static double defaultContentOpacity = 0.9;
+
     private static Duration defaultFadeInDuration = new Duration(600);
+
     private static Duration defaultFadeOutDuration = new Duration(300);
 
     public static double getDefaultContentOpacity() {
+
         return defaultContentOpacity;
     }
 
     public static void setDefaultContentOpacity(double opacity) {
+
         Toast.defaultContentOpacity = opacity;
     }
 
     public static Duration getDefaultFadeInDuration() {
+
         return defaultFadeInDuration;
     }
 
     public static void setDefaultFadeInDuration(Duration duration) {
+
         if (duration == null) {
             throw new NullPointerException();
         }
@@ -57,10 +64,12 @@ public class Toast extends Popup {
     }
 
     public static Duration getDefaultFadeOutDuration() {
+
         return defaultFadeOutDuration;
     }
 
     public static void setDefaultFadeOutDuration(Duration duration) {
+
         if (duration == null) {
             throw new NullPointerException();
         }
@@ -68,34 +77,45 @@ public class Toast extends Popup {
     }
 
     private static volatile boolean alreadyShowing = false;
+
     private static final Queue<Toast> toastQueue = new LinkedBlockingQueue<>(50);
 
     public static int clearWaitingToasts() {
+
         int count = toastQueue.size();
         toastQueue.clear();
         return count;
     }
 
     private Node content;
+
     private Duration duration;
+
     private boolean autoCenter = true;
 
     private Window window;
+
     private Node anchor;
+
     private double screenX;
+
     private double screenY;
 
     private double contentOpacity = defaultContentOpacity;
+
     private Duration fadeInDuration = defaultFadeInDuration;
+
     private Duration fadeOutDuration = defaultFadeOutDuration;
 
     private Timeline hideTimer;
 
     public Toast() {
+
         setAutoHide(true);
     }
 
     public void setContent(Node content) {
+
         if (content == null) {
             throw new NullPointerException();
         }
@@ -105,10 +125,12 @@ public class Toast extends Popup {
     }
 
     public Duration getDuration() {
+
         return duration;
     }
 
     public void setDuration(Duration duration) {
+
         if (duration == null) {
             throw new NullPointerException();
         }
@@ -116,26 +138,32 @@ public class Toast extends Popup {
     }
 
     public boolean isAutoCenter() {
+
         return autoCenter;
     }
 
     public void setAutoCenter(boolean autoCenter) {
+
         this.autoCenter = autoCenter;
     }
 
     public double getContentOpacity() {
+
         return contentOpacity;
     }
 
     public void setContentOpacity(double opacity) {
+
         this.contentOpacity = opacity;
     }
 
     public Duration getFadeInDuration() {
+
         return fadeInDuration;
     }
 
     public void setFadeInDuration(Duration duration) {
+
         if (duration == null) {
             throw new NullPointerException();
         }
@@ -143,10 +171,12 @@ public class Toast extends Popup {
     }
 
     public Duration getFadeOutDuration() {
+
         return fadeOutDuration;
     }
 
     public void setFadeOutDuration(Duration duration) {
+
         if (duration == null) {
             throw new NullPointerException();
         }
@@ -155,11 +185,13 @@ public class Toast extends Popup {
 
     @Override
     public void show(Window window) {
+
         this.show(window, Double.NaN, Double.NaN);
     }
 
     @Override
     public void show(Window window, double screenX, double screenY) {
+
         if (window == null) {
             return;
         }
@@ -171,12 +203,14 @@ public class Toast extends Popup {
     }
 
     public void show(Node anchor) {
+
         autoCenter = true;
         this.show(anchor, Double.NaN, Double.NaN);
     }
 
     @Override
     public void show(Node anchor, double screenX, double screenY) {
+
         if (anchor == null) {
             return;
         }
@@ -187,7 +221,10 @@ public class Toast extends Popup {
         tryShow();
     }
 
+
+
     public void show(Node anchor, Side side, double offsetX, double offsetY) {
+
         if (anchor == null) {
             return;
         }
@@ -201,10 +238,53 @@ public class Toast extends Popup {
     }
 
     public void show(Node anchor, Side side) {
+
         this.show(anchor, side, 0, 0);
     }
 
+    public void showOnLeft(Node anchor) {
+
+        showOnRight(anchor, 0, 0);
+    }
+
+    public void showOnLeft(Node anchor, double offsetX, double offsetY) {
+
+        show(anchor, Side.LEFT, 0, 0);
+    }
+
+    public void showOnRight(Node anchor) {
+
+        showOnRight(anchor, 0, 0);
+    }
+
+    public void showOnRight(Node anchor, double offsetX, double offsetY) {
+
+        show(anchor, Side.RIGHT, 0, 0);
+    }
+
+
+    public void showOnTop(Node anchor) {
+
+        showOnRight(anchor, 0, 0);
+    }
+
+    public void showOnTop(Node anchor, double offsetX, double offsetY) {
+
+        show(anchor, Side.TOP, 0, 0);
+    }
+
+    public void showOnBottom(Node anchor) {
+
+        showOnRight(anchor, 0, 0);
+    }
+
+    public void showOnBottom(Node anchor, double offsetX, double offsetY) {
+
+        show(anchor, Side.BOTTOM, 0, 0);
+    }
+
     private void tryShow() {
+
         if (window == null && anchor == null) {
             throw new IllegalStateException("window and anchor node are both null");
         }
@@ -222,6 +302,7 @@ public class Toast extends Popup {
     }
 
     private void doShow() {
+
         log.trace("show toast: {}", this);
         if (window != null) {
             if (autoCenter) {
@@ -248,8 +329,10 @@ public class Toast extends Popup {
         if (isAutoHide() && !duration.isIndefinite()) {
             hideTimer = new Timeline(new KeyFrame(duration));
             hideTimer.setOnFinished(new EventHandler<ActionEvent>() {
+
                 @Override
                 public void handle(ActionEvent event) {
+
                     hideTimer = null;
                     Toast.this.hide();
                 }
@@ -263,6 +346,7 @@ public class Toast extends Popup {
     }
 
     private void connectAutoCenterHandler() {
+
         XListener xListener = new XListener();
         super.widthProperty().addListener(xListener);
         YListener yListener = new YListener();
@@ -271,6 +355,7 @@ public class Toast extends Popup {
 
     @Override
     public void hide() {
+
         log.trace("hide toast: {}", this);
         if (hideTimer != null) {
             // cancel the timer if the toast is hidden before the timer fires
@@ -283,8 +368,10 @@ public class Toast extends Popup {
         FadeTransition transition = new FadeTransition(fadeOutDuration, content);
         transition.setToValue(0.0);
         transition.setOnFinished(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
+
                 doHide();
             }
         });
@@ -292,6 +379,7 @@ public class Toast extends Popup {
     }
 
     private void doHide() {
+
         super.hide();
         if (toastQueue.isEmpty()) {
             alreadyShowing = false;
@@ -300,8 +388,10 @@ public class Toast extends Popup {
             final Toast toast = toastQueue.poll();
             log.debug("toast unqueued: {}", toast);
             Platform.runLater(new Runnable() {
+
                 @Override
                 public void run() {
+
                     toast.doShow();
                 }
             });
@@ -310,6 +400,7 @@ public class Toast extends Popup {
 
     @Override
     public String toString() {
+
         final StringBuilder sb = new StringBuilder();
         sb.append("Toast");
         sb.append("{content=").append(content);
@@ -320,13 +411,17 @@ public class Toast extends Popup {
     // helper methods
 
     public static final Duration DURATION_SHORT = Duration.seconds(2);
+
     public static final Duration DURATION_LONG = Duration.seconds(4);
 
     private static final Color DEFAULT_BACKGROUND_COLOR = Color.gray(0.2);
+
     private static final double DEFAULT_BACKGROUND_ARC = 8.0;
+
     private static final Insets DEFAULT_CONTENT_MARGIN = new Insets(8, 16, 8, 16);
 
     public static Toast makeToast(Node content, Duration duration) {
+
         if (content == null) {
             throw new NullPointerException("content");
         }
@@ -355,6 +450,7 @@ public class Toast extends Popup {
     private static final Color DEFAULT_FILL_COLOR = Color.WHITE;
 
     public static Toast makeText(String text, boolean wrapText, double maxWidth, double maxHeight, Duration duration) {
+
         Label label = new Label(text);
         label.getStyleClass().add("text");
         label.setWrapText(wrapText);
@@ -365,12 +461,21 @@ public class Toast extends Popup {
     }
 
     public static Toast makeText(String text, Duration duration) {
+
         return makeText(text, true, 500, 250, duration);
     }
 
+    public static Toast makeText(String text) {
+
+        return makeText(text, DURATION_SHORT);
+    }
+
+
     private class XListener implements ChangeListener<Number> {
+
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+
             double x = window.getX() + window.getWidth() / 2 - Toast.super.getWidth() / 2;
             if (!Double.isNaN(screenX)) {
                 x += screenX; // use as offset
@@ -380,8 +485,10 @@ public class Toast extends Popup {
     }
 
     private class YListener implements ChangeListener<Number> {
+
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+
             double y = window.getY() + window.getHeight() / 2 - Toast.super.getHeight() / 2;
             if (!Double.isNaN(screenY)) {
                 y += screenY; // use as offset
