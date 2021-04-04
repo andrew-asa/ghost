@@ -1,14 +1,20 @@
 package com.asa.weixin.spider.service;
 
 import com.asa.utils.ListUtils;
+import com.asa.utils.StringUtils;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
+import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveDao;
+import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountsDao;
+import com.asa.weixin.spider.utils.SnapshotSaveConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author andrew_asa
@@ -19,6 +25,60 @@ public class WeixinFavorAccountsService {
 
     @Autowired
     private WeixinFavorAccountsDao favorAccountsDao;
+
+    @Autowired
+    private WeixinSpiderSnapshotSaveDao spiderSnapshotSaveDao;
+
+    /**
+     * 更新收藏号顺序
+     * @param accounts
+     */
+    public void updateFavourSeqAccount(List<WeixinPublicAccount> accounts) {
+
+        if (ListUtils.isNotEmpty(accounts)) {
+            List<String> ids = accounts.stream()
+                    .map(WeixinPublicAccount::getFakeId)
+                    .collect(Collectors.toList());
+            String ks = StringUtils.join(ids, SnapshotSaveConstant.FAVOR_ACCOUNT_LIST_SEPARATOR);
+            WeixinSpiderSnapshotSaveEntity se = new WeixinSpiderSnapshotSaveEntity(SnapshotSaveConstant.FAVOR_ACCOUNT, ks);
+            spiderSnapshotSaveDao.save(se);
+        }
+    }
+
+    public List<String> getFavorSeqAccountFakeIds() {
+
+        List<String> ret = new ArrayList();
+        if (spiderSnapshotSaveDao.existsById(SnapshotSaveConstant.FAVOR_ACCOUNT)) {
+            WeixinSpiderSnapshotSaveEntity saveEntity = spiderSnapshotSaveDao.findByKey(SnapshotSaveConstant.FAVOR_ACCOUNT);
+            String[] ids = StringUtils.split(saveEntity.getValue(), SnapshotSaveConstant.FAVOR_ACCOUNT_LIST_SEPARATOR);
+            ret.addAll(ListUtils.arrayToList(ids));
+        }
+        return ret;
+    }
+
+    public List<WeixinPublicAccount> getAllFavorAccountsBySeq() {
+
+        List<WeixinPublicAccount> accounts = new ArrayList<>();
+        List<WeixinFavorAccountEntity>  accountEntities = favorAccountsDao.findAll();
+        List<String> ids = getFavorSeqAccountFakeIds();
+        for (String fid : ids) {
+             Iterator<WeixinFavorAccountEntity> each = accountEntities.iterator();
+            while (each.hasNext()) {
+                WeixinFavorAccountEntity item = each.next();
+                if (StringUtils.equals(fid,item.getFakeId())) {
+                    each.remove();
+                    accounts.add(entityToAccount(item));
+                }
+            }
+        }
+        // 剩下的账号直接放末尾就可以
+        if (ListUtils.isNotEmpty(accountEntities)) {
+            accountEntities.forEach(entity -> {
+                accounts.add(entityToAccount(entity));
+            });
+        }
+        return accounts;
+    }
 
     public List<WeixinPublicAccount> getAllFavorAccounts() {
 
