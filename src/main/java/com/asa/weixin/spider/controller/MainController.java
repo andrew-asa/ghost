@@ -12,13 +12,22 @@ import com.asa.weixin.spider.view.MainViewContent;
 
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 
+import javax.imageio.ImageIO;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -35,10 +44,52 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        setTray();
         installListener();
         preLoadSubViews();
         installMainPanel();
+    }
+
+    private void setTray() {
+        try {
+            BufferedImage image = ImageIO.read(new ClassPathResource("com/asa/weixin/spider/img/Jarvis.png").getInputStream());
+            TrayIcon trayIcon = initTray("jarvis", image);
+            Spider.getStage().setOnCloseRequest(event -> {
+                try {
+                    if (SystemTray.isSupported())
+                        if (trayIcon != null)
+                            SystemTray.getSystemTray().remove(trayIcon);
+                } catch (Exception ignored) {
+                }
+                System.exit(0);
+            });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    private TrayIcon initTray(String appName, BufferedImage bufferedImage) throws Exception {
+        TrayIcon trayIcon = null;
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            //BufferedImage bufferedImage = SwingFXUtils.fromFXImage(logoImage, null);
+            PopupMenu popupMenu = new PopupMenu();
+            java.awt.MenuItem exitItem = new java.awt.MenuItem("退出");
+            exitItem.addActionListener(e -> { System.exit(0);});
+            popupMenu.add(exitItem);
+            java.awt.MenuItem back = new java.awt.MenuItem("回主页面");
+            exitItem.addActionListener(e -> {mainWindow.requestFocus();});
+            popupMenu.add(back);
+            if (bufferedImage != null) {
+                trayIcon = new TrayIcon(bufferedImage, appName);
+                trayIcon.setImageAutoSize(true);
+                trayIcon.setToolTip(appName);
+                trayIcon.setPopupMenu(popupMenu);
+                tray.add(trayIcon);
+            }
+        }
+        return trayIcon;
     }
 
     private void preLoadSubViews() {

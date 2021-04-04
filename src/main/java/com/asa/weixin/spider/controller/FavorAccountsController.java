@@ -133,9 +133,7 @@ public class FavorAccountsController implements Initializable {
             TableRow<WeixinPublicAccount> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    if (row.getContextMenu() == null) {
-                        customRowContextMenu(row);
-                    }
+                    customRowContextMenu(row);
                 } else if (event.getClickCount() == 2) {
                     WeixinPublicAccount account = row.getItem();
                     searchWeixinAccountArticle(account);

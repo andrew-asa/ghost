@@ -1,6 +1,7 @@
 package com.asa.weixin.spider;
 
 import com.asa.weixin.spider.view.MainView;
+import com.asa.weixin.spider.view.SplashScreenCustom;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,6 +14,6 @@ public class Spider extends AbstractJavaFxApplicationSupport {
 
     public static void main(String[] args) {
 
-        launch(Spider.class, MainView.class, args);
+        launch(Spider.class, MainView.class, new SplashScreenCustom(),args);
     }
 }
