@@ -17,3 +17,11 @@
 .clickButton:pressed{
     -fx-opacity: 0.25;
 }
+
+.unFavorFill{
+    -fx-fill: #8a8a8a;
+}
+
+.favorFill{
+    -fx-fill: #dd2020;
+}

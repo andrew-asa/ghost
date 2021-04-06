@@ -191,6 +191,7 @@ public class WeixinArticle {
         return new StringJoiner(", ", WeixinArticle.class.getSimpleName() + "[", "]")
                 .add("link='" + link + "'")
                 .add("title='" + title + "'")
+                .add("aid='" + aid + "'")
                 .toString();
     }
 }
