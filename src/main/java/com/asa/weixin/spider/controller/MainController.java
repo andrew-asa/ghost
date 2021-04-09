@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
@@ -79,7 +80,15 @@ public class MainController implements Initializable {
             exitItem.addActionListener(e -> { System.exit(0);});
             popupMenu.add(exitItem);
             java.awt.MenuItem back = new java.awt.MenuItem("回主页面");
-            exitItem.addActionListener(e -> {mainWindow.requestFocus();});
+            back.addActionListener(e -> {
+                Platform.runLater(() -> {
+                    Stage stage = Spider.getStage();
+                    if(!Spider.getStage().isShowing()){
+                        stage.show();
+                    }
+                    stage.toFront();
+                });
+            });
             popupMenu.add(back);
             if (bufferedImage != null) {
                 trayIcon = new TrayIcon(bufferedImage, appName);

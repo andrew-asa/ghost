@@ -3,7 +3,6 @@ package com.asa.weixin.spider.ui;
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.sun.istack.internal.Nullable;
 
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -71,7 +70,7 @@ public class DialogBuilder {
      * @param color                      文字颜色 十六进制 #fafafa
      * @return
      */
-    public DialogBuilder setNegativeBtn(String negativeBtnText, @Nullable OnClickListener negativeBtnOnclickListener, String color) {
+    public DialogBuilder setNegativeBtn(String negativeBtnText,  OnClickListener negativeBtnOnclickListener, String color) {
         if (color != null) {
             this.negativeBtnPaint = Paint.valueOf(color);
         }
@@ -86,7 +85,7 @@ public class DialogBuilder {
      * @param negativeBtnOnclickListener listener
      * @return
      */
-    public DialogBuilder setNegativeBtn(String negativeBtnText, @Nullable OnClickListener negativeBtnOnclickListener) {
+    public DialogBuilder setNegativeBtn(String negativeBtnText,  OnClickListener negativeBtnOnclickListener) {
 
         negativeBtn = new JFXButton(negativeBtnText);
         negativeBtn.setCancelButton(true);
@@ -120,7 +119,7 @@ public class DialogBuilder {
      * @param color                      颜色 十六进制 #fafafa
      * @return
      */
-    public DialogBuilder setPositiveBtn(String positiveBtnText, @Nullable OnClickListener positiveBtnOnclickListener, String color) {
+    public DialogBuilder setPositiveBtn(String positiveBtnText, OnClickListener positiveBtnOnclickListener, String color) {
         this.positiveBtnPaint = Paint.valueOf(color);
         return setPositiveBtn(positiveBtnText, positiveBtnOnclickListener);
     }
@@ -132,7 +131,7 @@ public class DialogBuilder {
      * @param positiveBtnOnclickListener 点击监听器
      * @return
      */
-    public DialogBuilder setPositiveBtn(String positiveBtnText, @Nullable OnClickListener positiveBtnOnclickListener) {
+    public DialogBuilder setPositiveBtn(String positiveBtnText,  OnClickListener positiveBtnOnclickListener) {
         positiveBtn = new JFXButton(positiveBtnText);
         positiveBtn.setDefaultButton(true);
         positiveBtn.setTextFill(positiveBtnPaint);

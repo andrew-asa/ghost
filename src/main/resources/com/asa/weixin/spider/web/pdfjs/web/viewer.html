@@ -38,7 +38,31 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 
   <script src="viewer.js"></script>
+    <!-- CUSTOM BLOCK -->
+    <script>
+    var openFileFromBase64 = function(data) {
+        var arr = base64ToArrayBuffer(data);
+        console.log(arr);
+        PDFViewerApplication.open(arr);
+    }
 
+    var changeLanguage = function(language) {
+         var mozL10n = document.mozL10n || document.webL10n;
+         if(mozL10n !== null){
+              mozL10n.setLanguage(language);
+          }
+    }
+
+    function base64ToArrayBuffer(base64) {
+      var binary_string = window.atob(base64);
+      var len = binary_string.length;
+      var bytes = new Uint8Array( len );
+      for (var i = 0; i < len; i++)        {
+          bytes[i] = binary_string.charCodeAt(i);
+      }
+      return bytes.buffer;
+    }
+</script>
   </head>
 
   <body tabindex="1">

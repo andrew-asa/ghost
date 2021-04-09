@@ -14493,10 +14493,11 @@ document.webL10n = function (window, document, undefined) {
     getLanguage: function () {
       return gLanguage;
     },
-    setLanguage: function (lang, callback) {
-      loadLocale(lang, function () {
-        if (callback) callback();
-      });
+    setLanguage: function setLanguage(lang, callback) {
+          loadLocale(lang, function () {
+            if (callback) callback();
+            translateFragment();
+            });
     },
     getDirection: function () {
       var rtlList = ['ar', 'he', 'fa', 'ps', 'ur'];

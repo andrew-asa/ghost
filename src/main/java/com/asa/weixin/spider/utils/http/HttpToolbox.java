@@ -1,16 +1,12 @@
 package com.asa.weixin.spider.utils.http;
 
 
-
 import com.asa.log.LoggerFactory;
-import com.asa.third.org.apache.commons.lang3.ArrayUtils;
 import com.asa.utils.EncodeConstants;
 import com.asa.weixin.spider.utils.http.handle.BaseHttpResponseHandle;
-import com.asa.weixin.spider.utils.http.handle.StreamResponseHandle;
 import com.asa.weixin.spider.utils.http.handle.TextResponseHandle;
 import com.asa.weixin.spider.utils.http.handle.UploadResponseHandle;
 import com.google.common.collect.Maps;
-import com.sun.istack.internal.NotNull;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHost;
@@ -32,7 +28,6 @@ import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -42,8 +37,6 @@ import org.apache.http.protocol.HttpContext;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.UnsupportedEncodingException;
@@ -53,7 +46,6 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
