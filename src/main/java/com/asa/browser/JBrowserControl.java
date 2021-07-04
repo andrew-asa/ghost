@@ -33,4 +33,27 @@ public interface JBrowserControl {
      * @param url
      */
     void exportPdf(String url);
+
+    /**
+     * 前进,越界返回-1
+     */
+    int forward();
+
+    /**
+     * 后退。越界返回-1
+     * @return
+     */
+    int back();
+
+    /**
+     * 获取文章标题
+     * @return
+     */
+    String getTitle();
+
+    /**
+     * 获取当前地址
+     * @return
+     */
+    String getLocation();
 }

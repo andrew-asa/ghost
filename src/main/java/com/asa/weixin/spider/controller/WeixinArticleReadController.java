@@ -79,7 +79,7 @@ public class WeixinArticleReadController implements Initializable {
     @FXML
     private SVGPath favorImg;
 
-    private WebEngine webEngine;
+    //private WebEngine webEngine;
 
     @Autowired
     private WeixinFavorArticleService favorArticleService;
@@ -126,60 +126,35 @@ public class WeixinArticleReadController implements Initializable {
 
     public void pdfConverter() {
 
-        LoggerFactory.getLogger().debug(this.getClass(),"pdfConverter");
-        try {
-            Printer printer = findPdfWriterPrint();
-            if (printer == null) {
-                Toast.makeText("请先安装pdfwriterformac").showOnRight(pdfConverter);
-            } else {
-                PrinterJob job = PrinterJob.createPrinterJob(printer);
-                //job.showPageSetupDialog(Spider.getStage());
-                job.showPrintDialog(Spider.getStage());
-                job.getJobSettings().setJobName(weixinArticle.getTitle());
-                //job.;
-                if (job != null) {
-                    webEngine.print(job);
-                    job.endJob();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        browser.exportPdf();
     }
 
-    private Printer findPdfWriterPrint() {
 
-        Printer[] printers = Printer.getAllPrinters().toArray(new Printer[0]);
-        if (printers != null) {
-            for (Printer printer : printers) {
-                if (StringUtils.equalsIgnoreCase(printer.getName(), "pdfwriter")) {
-                    return printer;
-                }
-            }
-        }
-        return null;
-    }
 
     public void forward() {
-
-        final WebHistory history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entryList = history.getEntries();
-        int currentIndex = history.getCurrentIndex();
-        if (currentIndex + 1 < ListUtils.length(entryList)) {
-            history.go(1);
-            LoggerFactory.getLogger().debug(this.getClass(),"forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
-        }
+        browser.forward();
+        //final WebHistory history = webEngine.getHistory();
+        //ObservableList<WebHistory.Entry> entryList = history.getEntries();
+        //int currentIndex = history.getCurrentIndex();
+        //if (currentIndex + 1 < ListUtils.length(entryList)) {
+        //    history.go(1);
+        //    LoggerFactory.getLogger().debug(this.getClass(),"forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
+        //}
     }
 
     public void back() {
 
-        final WebHistory history = webEngine.getHistory();
-        ObservableList<WebHistory.Entry> entryList = history.getEntries();
-        int currentIndex = history.getCurrentIndex();
-        if (currentIndex > 0) {
-            history.go(-1);
-            //LoggerFactory.getLogger().debug("back {}",entryList.get(currentIndex>0?currentIndex-1:currentIndex).getUrl());
-        } else {
+        //final WebHistory history = webEngine.getHistory();
+        //ObservableList<WebHistory.Entry> entryList = history.getEntries();
+        //int currentIndex = history.getCurrentIndex();
+        //if (currentIndex > 0) {
+        //    history.go(-1);
+        //    //LoggerFactory.getLogger().debug("back {}",entryList.get(currentIndex>0?currentIndex-1:currentIndex).getUrl());
+        //} else {
+        //    pageHome();
+        //}
+        int index = browser.back();
+        if (index < 0) {
             pageHome();
         }
     }
@@ -232,7 +207,7 @@ public class WeixinArticleReadController implements Initializable {
             Label nameLabel = new Label("名字");
             JFXTextField markNameText = new JFXTextField();
 
-            markNameText.setText(webEngine.getTitle());
+            markNameText.setText(browser.getTitle());
             Label folderLabel = new Label("文件夹");
 
             List<String> folders = favorArticleService.getFolders();
@@ -293,9 +268,9 @@ public class WeixinArticleReadController implements Initializable {
                 }
                 title = markNameText.getText();
                 if (title == null) {
-                    title = webEngine.getTitle();
+                    title = browser.getTitle();
                 }
-                favorArticleService.addToFavor(webEngine.getLocation(), folder,title);
+                favorArticleService.addToFavor(browser.getLocation(), folder,title);
                 popOver.hide();
             });
             newFolderMarkFolder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
