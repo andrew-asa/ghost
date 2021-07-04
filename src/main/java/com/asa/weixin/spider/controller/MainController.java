@@ -150,10 +150,10 @@ public class MainController implements Initializable {
         Node view = subViewContent.getView();
         Platform.runLater(() -> {
             EventDispatcher.fire(MainPanelEvent.UNINSTALL, tl);
-            LoggerFactory.getLogger().debug("uninstall {}",tl);
+            LoggerFactory.getLogger().debug(this.getClass(),"uninstall {}",tl);
             EventDispatcher.fire(MainPanelEvent.BEFORE_INSTALL, viewName);
             mainWindow.setCenter(view);
-            LoggerFactory.getLogger().debug("install {}",viewName);
+            LoggerFactory.getLogger().debug(this.getClass(),"install {}",viewName);
             Spider.getStage().setHeight(((Pane) view).getPrefHeight());
             Spider.getStage().setWidth(((Pane) view).getPrefWidth());
             ((Pane) view).prefWidthProperty().bind(mainWindow.widthProperty());

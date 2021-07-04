@@ -10,11 +10,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import com.asa.browser.JBrowser?>
+
 <?import javafx.scene.web.WebView?>
 
+<?import com.asa.browser.JBrowser?>
 <BorderPane fx:id="articleReadBox" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.asa.weixin.spider.controller.WeixinArticleReadController">
+<!--   <center>-->
+<!--      <WebView fx:id="webContainer" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />-->
+<!--   </center>-->
    <center>
-      <WebView fx:id="webContainer" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+      <JBrowser fx:id="browser"/>
    </center>
    <bottom>
       <VBox BorderPane.alignment="CENTER">

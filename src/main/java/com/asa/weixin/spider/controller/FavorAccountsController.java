@@ -73,7 +73,7 @@ public class FavorAccountsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug("FavorAccountsController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(),"FavorAccountsController initialize");
         iniTable();
         initListener();
     }
@@ -164,14 +164,14 @@ public class FavorAccountsController implements Initializable {
 
     private void accountToTop(WeixinPublicAccount account) {
 
-        LoggerFactory.getLogger().debug("to top{}", account);
+        LoggerFactory.getLogger().debug(this.getClass(),"to top{}", account);
 
         EventDispatcher.asyncFire(FavorAccountEvent.TO_LIST_TOP,account);
     }
 
     private void accountToBottom(WeixinPublicAccount account) {
 
-        LoggerFactory.getLogger().debug("to bottom{}", account);
+        LoggerFactory.getLogger().debug(this.getClass(),"to bottom{}", account);
 
         EventDispatcher.asyncFire(FavorAccountEvent.TO_LIST_BOTTOM,account);
     }

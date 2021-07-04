@@ -34,7 +34,7 @@ public class WeixinLoginPaneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug("LoginPaneController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(),"LoginPaneController initialize");
         initAction();
     }
 

@@ -54,7 +54,7 @@ public class WeixinPublicAccountSearchController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug("PublicAccountController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(),"PublicAccountController initialize");
         iniTable();
         //showCommonUsedAccount();
         initListener();
@@ -76,7 +76,7 @@ public class WeixinPublicAccountSearchController implements Initializable {
             @Override
             public void on(Event event, SearchItem param) {
 
-                LoggerFactory.getLogger().debug("start search {}", param);
+                LoggerFactory.getLogger().debug(this.getClass(),"start search {}", param);
                 List<WeixinPublicAccount> ret = searchService.searchPublicAccount(param.getKeyword());
                 showCommonUsedAccount(ret);
             }

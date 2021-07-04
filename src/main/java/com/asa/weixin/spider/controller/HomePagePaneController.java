@@ -130,7 +130,7 @@ public class HomePagePaneController implements Initializable {
             popup.initOwner(stage);
             searchHideAnimation.setOnFinished(x -> {popup.hide();});
             searchShowAnimation.setOnFinished(x -> {
-                LoggerFactory.getLogger().debug("searchField request focus");
+                LoggerFactory.getLogger().debug(this.getClass(),"searchField request focus");
                 searchField.requestFocus();
             });
             popup.show();
@@ -188,7 +188,7 @@ public class HomePagePaneController implements Initializable {
                 if (event.getCode() == KeyCode.ENTER) {
                     String text = searchField.getText();
                     if (StringUtils.isNotEmpty(text)) {
-                        LoggerFactory.getLogger().debug("search {}", text);
+                        LoggerFactory.getLogger().debug(this.getClass(),"search {}", text);
                         showSearchPop();
                         EventDispatcher.asyncFire(SearchEvent.START_SEARCH,new SearchItem(getCurrentSearchTag(),text));
                     }

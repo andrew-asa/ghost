@@ -145,7 +145,7 @@ public class ArticleListPaneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug("PublicAccountController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(),"PublicAccountController initialize");
         iniTableView();
         settingSearchBox();
         settingFavorButton();
@@ -290,7 +290,7 @@ public class ArticleListPaneController implements Initializable {
 
     public void readArticle(WeixinArticle article) {
 
-        LoggerFactory.getLogger().debug("read article {}", article);
+        //LoggerFactory.getLogger().debug(this.getClass(),"read article {}", article);
         EventDispatcher.fire(WeixinArticleReadController.WeixinArticleReadEvent.REQUIRE_LOAD, article);
     }
 
@@ -331,7 +331,7 @@ public class ArticleListPaneController implements Initializable {
                 if (event.getCode() == KeyCode.ENTER) {
                     String text = searchField.getText();
                     if (StringUtils.isNotEmpty(text)) {
-                        LoggerFactory.getLogger().debug("search {}", text);
+                        LoggerFactory.getLogger().debug(this.getClass(),"search {}", text);
                         show(currentShowAccount,text);
                     }
                 }
@@ -414,7 +414,7 @@ public class ArticleListPaneController implements Initializable {
         int totalPageIndex = getTotalPageIndex();
         String j = jumpToPageNumber.getText();
         if (!NumberUtils.isDigits(j)) {
-            LoggerFactory.getLogger().debug("填充的不是数字 {}",j);
+            LoggerFactory.getLogger().debug(this.getClass(),"填充的不是数字 {}",j);
         }
        // todo 需要进一步操作，先不进行
         int ji = Integer.parseInt(j);

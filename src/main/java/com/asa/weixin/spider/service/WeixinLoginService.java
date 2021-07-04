@@ -52,6 +52,8 @@ public class WeixinLoginService {
 
     private boolean fromCacheCookies;
 
+    //private boolean
+
     private boolean login;
 
     public boolean isFromCacheCookies() {
@@ -133,6 +135,7 @@ public class WeixinLoginService {
             if (status) {
                 EventDispatcher.fire(BrowserServiceEvent.LOGIN_SUCCESS, qrcodeBytes);
                 savaCookie(browser);
+                fromCacheCookies = true;
                 System.out.println("===== 成功登录 ======");
             } else {
                 EventDispatcher.fire(BrowserServiceEvent.LOGIN_TIMEOUT, qrcodeBytes);

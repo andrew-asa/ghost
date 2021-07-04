@@ -7,6 +7,7 @@ import com.asa.utils.StringUtils;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.model.WeixinArticlesInfo;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -99,6 +100,11 @@ public class WeixinSearchService {
                 weixinArticlesInfo.addArticles(ar.subList(0, ti));
             }
         }
+        //try {
+        //    System.out.println(new ObjectMapper().writeValueAsString(weixinArticlesInfo));
+        //} catch (Exception e) {
+        //
+        //}
         return weixinArticlesInfo;
     }
 

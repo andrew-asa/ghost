@@ -37,7 +37,7 @@ public class WeixinFavorArticleService {
     public void addToFavor(String url,String folder,String title) {
 
         if (url != null) {
-            LoggerFactory.getLogger().debug("add to favor {},{},{}",folder,title,url);
+            LoggerFactory.getLogger().debug(this.getClass(),"add to favor {},{},{}",folder,title,url);
         }
     }
 

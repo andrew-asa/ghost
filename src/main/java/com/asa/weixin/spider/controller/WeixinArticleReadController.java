@@ -3,6 +3,7 @@ package com.asa.weixin.spider.controller;
 import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
+import com.asa.browser.JBrowser;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.ListUtils;
 import com.asa.utils.StringUtils;
@@ -58,7 +59,7 @@ import java.util.ResourceBundle;
 public class WeixinArticleReadController implements Initializable {
 
     @FXML
-    private WebView webContainer;
+    private JBrowser browser;
 
     @FXML
     private Button back;
@@ -99,7 +100,7 @@ public class WeixinArticleReadController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug("WeixinArticleReadController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(),"WeixinArticleReadController initialize");
         initListener();
         initWebEngine();
         initButtonAction();
@@ -125,7 +126,7 @@ public class WeixinArticleReadController implements Initializable {
 
     public void pdfConverter() {
 
-        LoggerFactory.getLogger().debug("pdfConverter");
+        LoggerFactory.getLogger().debug(this.getClass(),"pdfConverter");
         try {
             Printer printer = findPdfWriterPrint();
             if (printer == null) {
@@ -166,7 +167,7 @@ public class WeixinArticleReadController implements Initializable {
         int currentIndex = history.getCurrentIndex();
         if (currentIndex + 1 < ListUtils.length(entryList)) {
             history.go(1);
-            LoggerFactory.getLogger().debug("forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
+            LoggerFactory.getLogger().debug(this.getClass(),"forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
         }
     }
 
@@ -190,7 +191,7 @@ public class WeixinArticleReadController implements Initializable {
 
     private void initWebEngine() {
 
-        webEngine = webContainer.getEngine();
+        //webEngine = webContainer.getEngine();
         //webEngine.getLoadWorker().stateProperty()
         //        .addListener(new ChangeListener<State>() {
         //            @Override
@@ -213,7 +214,7 @@ public class WeixinArticleReadController implements Initializable {
 
                 EventDispatcher.fire(HomePageSubPanelEvent.REQUIRE_INSTALL, WeixinArticleReadView.NAME);
                 weixinArticle = param;
-                webEngine.load(param.getLink());
+                browser.load(param.getLink());
             }
         });
     }

@@ -8,6 +8,7 @@ import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountsDao;
 import com.asa.weixin.spider.utils.SnapshotSaveConstant;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -77,6 +78,12 @@ public class WeixinFavorAccountsService {
                 accounts.add(entityToAccount(entity));
             });
         }
+        //try {
+        //
+        //    System.out.println(new ObjectMapper().writeValueAsString(accounts));
+        //} catch (Exception e) {
+        //
+        //}
         return accounts;
     }
 
