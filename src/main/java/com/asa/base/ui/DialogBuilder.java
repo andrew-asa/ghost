@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.ui;
+package com.asa.base.ui;
 
 import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;

@@ -1,5 +1,12 @@
 package com.asa.browser;
 
+import com.asa.browser.base.JBrowserDebugger;
+import com.asa.browser.base.JBrowserWidget;
+import com.asa.browser.base.JBrowserController;
+import com.asa.browser.interrupt.BrowserInterrupt;
+import com.asa.browser.base.JConsoleWebEngineProcess;
+import com.asa.browser.widget.console.JConsole;
+import com.asa.browser.widget.degger.JBrowserDebuggerImpl;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.ListUtils;
 import com.asa.utils.StringUtils;
@@ -16,26 +23,59 @@ import javafx.scene.web.WebView;
  * @author andrew_asa
  * @date 2021/7/4.
  */
-public class JBrowser extends BorderPane implements JBrowserControl {
+public class Browser extends BorderPane implements JBrowserController, JBrowserWidget {
 
 
     private WebView webView;
 
     private WebEngine webEngine;
 
+    private BrowserInterrupt interrupt;
+
+    private JBrowserDebugger debugger;
+
+    private JConsole console;
+
     /**
      * creates empty tool bar
      */
-    public JBrowser() {
-        initialize();
+    public Browser() {
 
+        initialize();
     }
 
-    public  void initialize() {
+    public void initialize() {
+
         webView = new WebView();
         setCenter(webView);
         webEngine = webView.getEngine();
+        initInterrupt();
+        initDebugger();
+        customBrowser();
     }
+
+    /**
+     * 插入自己定制的js
+     */
+    private void initInterrupt() {
+
+        this.interrupt = new BrowserInterrupt(webEngine);
+        interrupt.addDefaultInterruptJs();
+    }
+
+    private void initDebugger() {
+
+        this.debugger = new JBrowserDebuggerImpl(webEngine);
+    }
+
+    private void customBrowser() {
+        customConsole();
+    }
+
+    private void customConsole() {
+        console = new JConsole(new JConsoleWebEngineProcess(webEngine));
+    }
+
 
     /**
      * JBrowserControl
@@ -53,13 +93,15 @@ public class JBrowser extends BorderPane implements JBrowserControl {
 
     @Override
     public void load(String url) {
+
         webEngine.load(url);
-        LoggerFactory.getLogger().debug(this.getClass(),"load url {}", url);
+        LoggerFactory.getLogger().debug(this.getClass(), "load url {}", url);
     }
 
     @Override
     public void exportPdf() {
-        LoggerFactory.getLogger().debug(this.getClass(),"pdfConverter");
+
+        LoggerFactory.getLogger().debug(this.getClass(), "pdfConverter");
         try {
             Printer printer = findPdfWriterPrint();
             if (printer == null) {
@@ -105,7 +147,7 @@ public class JBrowser extends BorderPane implements JBrowserControl {
         int currentIndex = history.getCurrentIndex();
         if (currentIndex + 1 < ListUtils.length(entryList)) {
             history.go(1);
-            LoggerFactory.getLogger().debug(this.getClass(),"forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
+            LoggerFactory.getLogger().debug(this.getClass(), "forward {}", entryList.get(currentIndex < entryList.size() - 1 ? currentIndex + 1 : currentIndex).getUrl());
             return currentIndex++;
         }
         return -1;
@@ -133,5 +175,11 @@ public class JBrowser extends BorderPane implements JBrowserControl {
     public String getLocation() {
 
         return webEngine.getLocation();
+    }
+
+    @Override
+    public JBrowserDebugger getDebugger() {
+
+        return debugger;
     }
 }

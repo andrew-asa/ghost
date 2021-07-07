@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.ui.component;
+package com.asa.base.ui.component;
 
 import com.sun.javafx.util.Utils;
 import javafx.animation.FadeTransition;

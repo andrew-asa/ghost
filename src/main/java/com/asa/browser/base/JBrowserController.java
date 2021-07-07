@@ -1,11 +1,11 @@
-package com.asa.browser;
+package com.asa.browser.base;
 
 /**
  * @author andrew_asa
  * @date 2021/7/4.
- * 浏览器功能
+ * 浏览器控制器
  */
-public interface JBrowserControl {
+public interface JBrowserController {
 
     /**
      * 因此导航

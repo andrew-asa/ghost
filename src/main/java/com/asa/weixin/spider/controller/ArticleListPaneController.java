@@ -12,7 +12,7 @@ import com.asa.weixin.spider.model.WeixinArticlesInfo;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
 import com.asa.weixin.spider.service.WeixinFavorAccountsService;
 import com.asa.weixin.spider.service.WeixinSearchService;
-import com.asa.weixin.spider.ui.component.Toast;
+import com.asa.base.ui.component.Toast;
 import com.asa.weixin.spider.view.ArticleListPaneView;
 import com.asa.weixin.spider.view.FavorAccountsView;
 import de.felixroske.jfxsupport.FXMLController;

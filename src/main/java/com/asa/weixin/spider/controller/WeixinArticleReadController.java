@@ -3,15 +3,10 @@ package com.asa.weixin.spider.controller;
 import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
-import com.asa.browser.JBrowser;
+import com.asa.browser.Browser;
 import com.asa.log.LoggerFactory;
-import com.asa.utils.ListUtils;
-import com.asa.utils.StringUtils;
-import com.asa.weixin.spider.Spider;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.service.WeixinFavorArticleService;
-import com.asa.weixin.spider.service.pdf.HtmlToPdfService;
-import com.asa.weixin.spider.ui.component.Toast;
 import com.asa.weixin.spider.view.ArticleListPaneView;
 import com.asa.weixin.spider.view.WeixinArticleReadView;
 import com.jfoenix.controls.JFXButton;
@@ -23,23 +18,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.Side;
-import javafx.print.Printer;
-import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebHistory;
-import javafx.scene.web.WebView;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,7 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -59,7 +43,7 @@ import java.util.ResourceBundle;
 public class WeixinArticleReadController implements Initializable {
 
     @FXML
-    private JBrowser browser;
+    private Browser browser;
 
     @FXML
     private Button back;

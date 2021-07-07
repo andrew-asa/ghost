@@ -1,0 +1,47 @@
+.common-text-area {
+    /*-fx-focus-color: #4059A9;*/
+    /*-fx-unfocus-color: #4d4d4d;*/
+    /*-fx-padding: 0.333333em 0 0 0 ;*/
+}
+
+.common-text-area> .input-line {
+    /*-fx-background-color: -jfx-unfocus-color;*/
+    /*-fx-pref-height: 1px;*/
+    /*-fx-translate-y: 1px;*/
+}
+
+.common-text-area> .input-focused-line {
+    /*-fx-background-color: -jfx-focus-color;*/
+    /*-fx-pref-height: 2px;*/
+}
+
+.common-text-area,
+.common-text-area:focused {
+    -fx-prompt-text-fill: #4D4D4D;
+}
+
+.common-text-area,
+.common-text-area.scroll-pane,
+.common-text-area:focused,
+.common-text-area:focused .scroll-pane{
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+}
+
+.common-text-area.content,
+.common-text-area:focused .content{
+    -fx-background-color:TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-padding: 0 0 0 0;
+}
+
+.common-text-area:error {
+    -jfx-focus-color: #D34336;
+    -jfx-unfocus-color: #D34336;
+}
+
+.common-text-area.error-label {
+    -fx-text-fill: #D34336;
+}
+
+.common-text-area.error-icon {
+    -fx-fill: #D34336;
+}
