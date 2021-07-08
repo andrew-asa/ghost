@@ -1,7 +1,9 @@
 package com.asa.browser.widget.degger;
 
 import com.asa.browser.base.JBrowserDebugger;
+import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.selector.By;
+import com.asa.utils.StringUtils;
 import javafx.scene.web.WebEngine;
 
 /**
@@ -24,8 +26,30 @@ public class JBrowserDebuggerImpl implements JBrowserDebugger {
     }
 
     @Override
+    public Object executeScriptIgnoreException(String script) {
+
+        try {
+            return webEngine.executeScript(script);
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+
+    @Override
     public WebElement findElement(By selector) {
 
-        return null;
+        return new WebElementImpl(this, selector);
+    }
+
+    @Override
+    public String getCookie() {
+
+        Object c = executeScriptIgnoreException("document.cookie");
+        if (c != null && c instanceof String) {
+            return c.toString();
+        }
+        return StringUtils.EMPTY;
     }
 }

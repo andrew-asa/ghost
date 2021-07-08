@@ -20,4 +20,10 @@ public  class ById extends By implements Serializable {
     public String toString() {
         return "By.id: " + this.id;
     }
+
+    @Override
+    public String getSelector() {
+
+        return "#"+id;
+    }
 }

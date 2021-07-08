@@ -58,7 +58,7 @@ public class TestBrowser extends Application {
                 if (StringUtils.isNotEmpty(text) ) {
                     try {
                         Object ret = browser.getDebugger().executeScript(text);
-                        if (ret != null && ret instanceof String) {
+                        if (ret != null ) {
                             output.setText(ret.toString());
                         }
                     } catch (Exception e) {
