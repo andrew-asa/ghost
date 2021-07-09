@@ -3,18 +3,21 @@ package com.asa.weixin.spider.controller;
 import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
+import com.asa.browser.Browser;
+import com.asa.browser.base.JBrowserDebugger;
+import com.asa.browser.widget.degger.element.WebElement;
+import com.asa.browser.widget.degger.selector.By;
 import com.asa.log.LoggerFactory;
 import com.asa.weixin.spider.service.WeixinLoginService;
-import com.asa.weixin.spider.view.WeixinLoginPaneView;
 import com.asa.weixin.spider.view.HomePagePaneView;
+import com.asa.weixin.spider.view.WeixinLoginPaneView;
 import de.felixroske.jfxsupport.FXMLController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,21 +29,23 @@ import java.util.ResourceBundle;
 public class WeixinLoginPaneController implements Initializable {
 
     @FXML
-    private ImageView qrcode;
+    private BorderPane mainWindow;
 
-    @FXML
-    private Label loginTip;
+    private Browser browser;
+
+    @Autowired
+    private WeixinLoginService loginService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        LoggerFactory.getLogger().debug(this.getClass(),"LoginPaneController initialize");
+        LoggerFactory.getLogger().debug(this.getClass(), "LoginPaneController initialize");
         initAction();
     }
 
 
     private void initAction() {
-        initQrcode();
+        initLoginBrowser();
         initLoginAction();
     }
 
@@ -56,29 +61,35 @@ public class WeixinLoginPaneController implements Initializable {
         });
     }
 
-    public void initQrcode() {
+    private void initLoginBrowser() {
 
-        EventDispatcher.listen(WeixinLoginService.BrowserServiceEvent.CREATE_QRCODE, new Listener<Object>() {
+        browser = new Browser();
+        mainWindow.setCenter(browser);
+        EventDispatcher.listen(WeixinLoginService.BrowserServiceEvent.RE_LOGIN, new Listener<Object>() {
 
             @Override
             public void on(Event event, Object param) {
 
-                if (param != null) {
-                    EventDispatcher.fire(MainPanelEvent.REQUIRE_INSTALL, WeixinLoginPaneView.NAME);
-                    loadQrcode((byte[]) param);
-                }
+                EventDispatcher.fire(MainPanelEvent.REQUIRE_INSTALL, WeixinLoginPaneView.NAME);
+                Platform.runLater(()->reLogin());
             }
         });
     }
 
-
-    public void loadQrcode(byte[] bytes) {
-
-        if (qrcode.getImage() == null) {
-
-            if (bytes != null) {
-                qrcode.setImage(new Image(new ByteArrayInputStream(bytes)));
+    private void reLogin() {
+        browser.load(WeixinLoginService.LOGIN_URL);
+        JBrowserDebugger debugger = browser.getDebugger();
+        WebElement element = debugger.findElement(By.className("weui-desktop-account__info"));
+        element.waitExistUntil(300, (back)-> {
+            if (back) {
+                String cookie = debugger.getCookie();
+                loginService.savaCookie(cookie,browser.getLocation());
+                EventDispatcher.fire(WeixinLoginService.BrowserServiceEvent.LOGIN_SUCCESS, null);
+            }else {
+                // 等
+                LoggerFactory.getLogger().debug("reLogin again");
+                reLogin();
             }
-        }
+        });
     }
 }

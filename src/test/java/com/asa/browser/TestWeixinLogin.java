@@ -1,7 +1,6 @@
 package com.asa.browser;
 
 import com.asa.browser.base.JBrowserDebugger;
-import com.asa.browser.widget.degger.element.TimeOutCallback;
 import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.selector.By;
 import com.asa.log.LoggerFactory;
@@ -18,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
 
 /**
  * @author andrew_asa
@@ -93,26 +91,15 @@ public class TestWeixinLogin extends Application {
                 browser.load(browser.getLocation());
             }
         });
-        new Thread(()->{
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        LoggerFactory.getLogger().debug("start login");
+        JBrowserDebugger debugger = browser.getDebugger();
+        WebElement element = debugger.findElement(By.className("weui-desktop-account__info"));
+        element.waitExistUntil(30, (back)-> {
+            if (back) {
+                String cookie = debugger.getCookie();
+                output.setText(cookie);
             }
-            LoggerFactory.getLogger().debug("start log");
-            Platform.runLater(()->{
-                JBrowserDebugger debugger = browser.getDebugger();
-                WebElement element = debugger.findElement(By.className("weui-desktop-account__info"));
-                element.waitExistUntil(30, (back)-> {
-                    if (back) {
-                        String cookie = debugger.getCookie();
-                        output.setText(cookie);
-                    }
-                });
-            });
-        }).start();
-
-
+        });
         return bp;
     }
 }

@@ -45,29 +45,6 @@ public class DebuggerWait {
 
         Instant end = this.clock.instant().plus(this.timeout);
         until(isTrue, callback, end);
-        //while(true) {
-        //    try {
-        //        if (isTrue.apply(element)) {
-        //            callback.accept(true);
-        //            LoggerFactory.getLogger().debug("DebuggerWait pass");
-        //        }
-        //    } catch (Throwable ex) {
-        //        //    do nothing
-        //    }
-        //
-        //    if (end.isBefore(this.clock.instant())) {
-        //        callback.accept(false);
-        //    }
-        //
-        //    try {
-        //        //
-        //        LoggerFactory.getLogger().debug("{}--sleep--{}",System.currentTimeMillis(),interval.toMillis());
-        //        this.sleeper.sleep(this.interval);
-        //    } catch (InterruptedException ex) {
-        //        //Thread.currentThread().interrupt();
-        //        //return false;
-        //    }
-        //}
     }
 
     private void until(Function<WebElement, Boolean> isTrue, TimeOutCallback<Boolean> callback, Instant end) {
