@@ -2,9 +2,14 @@ package com.asa.browser.widget.degger;
 
 import com.asa.browser.base.BrowserReturnUtils;
 import com.asa.browser.base.JBrowserDebugger;
+import com.asa.browser.widget.degger.element.DebuggerWait;
+import com.asa.browser.widget.degger.element.TimeOutCallback;
 import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.screenshot.OutputType;
 import com.asa.browser.widget.degger.selector.By;
+import com.asa.log.LoggerFactory;
+
+import java.util.function.Function;
 
 /**
  * @author andrew_asa
@@ -46,14 +51,22 @@ public class WebElementImpl implements WebElement {
     }
 
     @Override
-    public boolean waitExistUntil(long timeOutInSeconds) {
+    public void waitExistUntil(long timeOutInSeconds, TimeOutCallback<Boolean> callback) {
 
-        if (exist()) {
-            return true;
-        } else {
-            // wait
-        }
-        return false;
+        //if (exist()) {
+        //    LoggerFactory.getLogger().debug("WebElement had exist return true");
+        //    callback.accept(true);
+        //}
+        DebuggerWait wait = new DebuggerWait(this, timeOutInSeconds);
+        wait.until(new Function<WebElement, Boolean>() {
+
+            @Override
+            public Boolean apply(WebElement element) {
+
+                return element.exist();
+            }
+        },callback);
+
     }
 
     @Override

@@ -3,8 +3,17 @@ package com.asa.browser.widget.degger;
 import com.asa.browser.base.JBrowserDebugger;
 import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.selector.By;
+import com.asa.log.LoggerFactory;
+import com.asa.utils.ListUtils;
 import com.asa.utils.StringUtils;
+import com.sun.webkit.network.CookieManager;
 import javafx.scene.web.WebEngine;
+
+import java.net.CookieHandler;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author andrew_asa
@@ -46,9 +55,19 @@ public class JBrowserDebuggerImpl implements JBrowserDebugger {
     @Override
     public String getCookie() {
 
-        Object c = executeScriptIgnoreException("document.cookie");
-        if (c != null && c instanceof String) {
-            return c.toString();
+        //Object c = executeScriptIgnoreException("document.cookie");
+        //if (c != null && c instanceof String) {
+        //    return c.toString();
+        //}
+        CookieManager cookieManager = (CookieManager) CookieHandler.getDefault();
+        try {
+            Map<String, List<String>> result = cookieManager.get(new URI(webEngine.getLocation()), new HashMap<>());
+            List<String> cookies = result.get("Cookie");
+            if (ListUtils.isNotEmpty(cookies)) {
+                return cookies.get(0);
+            }
+        }catch (Exception e) {
+            LoggerFactory.getLogger().debug("error get cookie from CookieManager");
         }
         return StringUtils.EMPTY;
     }

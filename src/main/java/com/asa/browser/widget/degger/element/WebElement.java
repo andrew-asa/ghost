@@ -30,5 +30,5 @@ public interface WebElement extends TakesScreenshot {
      * @param timeOutInSeconds
      * @return
      */
-    boolean waitExistUntil(long timeOutInSeconds);
+    void waitExistUntil(long timeOutInSeconds,TimeOutCallback<Boolean> callback);
 }
