@@ -1,4 +1,7 @@
 #微信公众号文章爬取器
+一开始想做的是文章公众号全部文章导出pdf，但是后面做的有点多
+内嵌了一个浏览器，pdf导出等，只放出部分代码，因为只是业余代码，有需要
+的可以在此基础上进行定制。
 
 ## 依赖 直接用lib里面的 
 ```
@@ -13,17 +16,23 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 ```
-<p align="center"> 
-<img src="note/md/依赖lib.png">
-</p>
 
 ## 相关界面
+###
 
+####扫描登录：
+![avatar](note/使用/登录.png)
+####搜索公众号
+![avatar](note/使用/搜索公众号.png)
+####公众号界面
+![avatar](note/使用/公众号界面.png)
+####收藏号界面
+![avatar](note/使用/收藏号界面.png)
+####文章列表界面
+![avatar](note/使用/文章列表界面.png)
+####文章列表界面
+![avatar](note/使用/文章阅读界面.png)
 
-## 依赖安装
-###1: chromedriver+selenium+chrome 自动化登录微信获取cookie
-###1.1: [selenium](https://www.selenium.dev/documentation/en/)
-###2: [pdfwriterformac](https://www.jianshu.com/p/55633dae3ec3)
 
  
 
