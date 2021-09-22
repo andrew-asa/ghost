@@ -22,7 +22,7 @@ public class TestTextField extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("jbrowser");
+        primaryStage.setTitle(this.getClass().getName());
         primaryStage.setScene(getRootScene());
         primaryStage.show();
     }

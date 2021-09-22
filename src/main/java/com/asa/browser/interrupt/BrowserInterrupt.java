@@ -33,19 +33,24 @@ public class BrowserInterrupt {
                 .addListener(
                         (obs, oldValue, newValue) -> {
                             if (newValue == Worker.State.SUCCEEDED) {
-                                List<String> js = getInterruptJs();
-                                js.forEach(item -> {
-                                    try {
-                                        ClassPathResource resource = new ClassPathResource(item);
-                                        String script = IOUtils.inputStream2String(resource.getInputStream());
-                                        if (StringUtils.isNotEmpty(script)) {
-                                            webEngine.executeScript(script);
+                                // 当前作用域里面有了就不加载
+                                try {
+                                    webEngine.executeScript("ghost");
+                                } catch (Throwable throwable) {
+                                    List<String> js = getInterruptJs();
+                                    js.forEach(item -> {
+                                        try {
+                                            ClassPathResource resource = new ClassPathResource(item);
+                                            String script = IOUtils.inputStream2String(resource.getInputStream());
+                                            if (StringUtils.isNotEmpty(script)) {
+                                                webEngine.executeScript(script);
+                                            }
+                                            LoggerFactory.getLogger().debug("add interrupt js {}", item);
+                                        } catch (Exception e) {
+                                            LoggerFactory.getLogger().warn("error add InterruptJs [{}]", item);
                                         }
-                                        LoggerFactory.getLogger().debug("add interrupt js {}", item);
-                                    } catch (Exception e) {
-                                        LoggerFactory.getLogger().warn("error add InterruptJs [{}]", item);
-                                    }
-                                });
+                                    });
+                                }
                             }
                         });
     }

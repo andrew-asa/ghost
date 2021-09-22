@@ -7,8 +7,7 @@ import org.jsoup.internal.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,8 +21,8 @@ public class BrowserTest {
 
     @Test
     public void testBrowser() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://www.baidu.com");
+        //WebDriver driver = new ChromeDriver();
+        //driver.get("http://www.baidu.com");
     }
 
     public void testShowQcode() {

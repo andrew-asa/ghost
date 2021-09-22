@@ -1,8 +1,6 @@
 package com.asa.browser.widget.degger.screenshot;
 
 
-import org.openqa.selenium.WebDriverException;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -51,15 +49,15 @@ public interface OutputType<T> {
         private File save(byte[] data) {
             FileOutputStream stream = null;
 
-            File var4;
+            File ret = null;
             try {
                 File tmpFile = File.createTempFile("screenshot", ".png");
                 tmpFile.deleteOnExit();
                 stream = new FileOutputStream(tmpFile);
                 stream.write(data);
-                var4 = tmpFile;
-            } catch (IOException var13) {
-                throw new WebDriverException(var13);
+                ret = tmpFile;
+            } catch (IOException ex) {
+                //throw new WebDriverException(var13);
             } finally {
                 if (stream != null) {
                     try {
@@ -70,7 +68,7 @@ public interface OutputType<T> {
 
             }
 
-            return var4;
+            return ret;
         }
 
         public String toString() {

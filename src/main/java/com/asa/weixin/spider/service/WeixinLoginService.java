@@ -101,11 +101,12 @@ public class WeixinLoginService {
         cookies = new Cookies();
         cookies.putMata(TOKEN,token);
         cookies.putMata(COOKIE_STR, cookieStr);
+        login=true;
         String js = JSONObject.toJSONString(cookies);
         try {
             FileUtils.writeStringToFile(new File(cookiePath), js);
         } catch (Exception e) {
-            LoggerFactory.getLogger().debug(e,"error sava cookie");
+            LoggerFactory.getLogger().error(e,"error sava cookie");
         }
     }
 

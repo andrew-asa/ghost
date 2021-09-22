@@ -5,7 +5,6 @@ import com.asa.browser.base.JBrowserDebugger;
 import com.asa.browser.widget.degger.element.DebuggerWait;
 import com.asa.browser.widget.degger.element.TimeOutCallback;
 import com.asa.browser.widget.degger.element.WebElement;
-import com.asa.browser.widget.degger.screenshot.OutputType;
 import com.asa.browser.widget.degger.selector.By;
 
 
@@ -59,12 +58,5 @@ public class WebElementImpl implements WebElement {
                 return false;
             }
         },callback);
-
-    }
-
-    @Override
-    public <X> X getScreenshotAs(OutputType<X> type) throws Exception {
-
-        return null;
     }
 }

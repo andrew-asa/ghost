@@ -6,7 +6,6 @@ import com.asa.utils.EncodeConstants;
 import com.asa.weixin.spider.utils.http.handle.BaseHttpResponseHandle;
 import com.asa.weixin.spider.utils.http.handle.TextResponseHandle;
 import com.asa.weixin.spider.utils.http.handle.UploadResponseHandle;
-import com.google.common.collect.Maps;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHost;
@@ -180,12 +179,13 @@ public class HttpToolbox {
         if (oldMap == null) {
             return null;
         }
-        return Maps.transformEntries(oldMap, new Maps.EntryTransformer<String, V, String>() {
-            @Override
-            public String transformEntry( String key,  V value) {
-                return value == null ? null : value.toString();
-            }
-        });
+        //return Maps.transformEntries(oldMap, new Maps.EntryTransformer<String, V, String>() {
+        //    @Override
+        //    public String transformEntry( String key,  V value) {
+        //        return value == null ? null : value.toString();
+        //    }
+        //});
+        return null;
     }
 
     /**
