@@ -22,13 +22,27 @@ public class UserServiceTest extends TestCase {
     @Autowired
     private UserService service;
 
+    public void testInit() {
+
+    }
+
+    public void testGetSelfInfo() {
+
+    }
+
+    @Test
+    public void testGetRelationInfo() throws Exception{
+        Map map = service.getRelationInfo("77859059");
+        LoggerFactory.getLogger().debug("---getRelationInfo {}--=",map);
+    }
+
     @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
     static class InnerConfig {
 
     }
 
     @Test
-    public void testGetUserInfo() {
+    public void testGetUserInfo() throws Exception{
 
         Map map = service.getUserInfo("77859059");
         LoggerFactory.getLogger().debug("---userinfo {}--=",map);

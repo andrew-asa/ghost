@@ -1,4 +1,4 @@
-package com.asa.bilibili.service;
+package com.asa.bilibili.data;
 
 /**
  * @author andrew_asa
