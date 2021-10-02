@@ -90,7 +90,7 @@ public class UserService {
             } else {
                 msg = "接口未返回错误信息";
             }
-            throw new ResponseCodeException("API 返回数据未含 code 字段");
+            throw new ResponseCodeException(msg);
         }
         return (Map) MapUtils.get(map, "data");
     }

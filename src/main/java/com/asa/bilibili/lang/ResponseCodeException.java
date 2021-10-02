@@ -9,7 +9,10 @@ import com.asa.utils.StringUtils;
  */
 public class ResponseCodeException extends AbstractException {
 
+    public static final String ERROR_CODE = StringUtils.EMPTY;
+
     public ResponseCodeException(String msg) {
-        super(StringUtils.EMPTY, msg);
+
+        super(ERROR_CODE, msg);
     }
 }
