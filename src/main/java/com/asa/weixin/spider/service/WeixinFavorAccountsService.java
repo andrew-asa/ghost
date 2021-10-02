@@ -7,8 +7,7 @@ import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveDao;
 import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountEntity;
 import com.asa.weixin.spider.model.db.WeixinFavorAccountsDao;
-import com.asa.weixin.spider.utils.SnapshotSaveConstant;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.asa.utils.SnapshotSaveConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

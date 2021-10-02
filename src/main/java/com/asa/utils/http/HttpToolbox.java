@@ -1,11 +1,11 @@
-package com.asa.weixin.spider.utils.http;
+package com.asa.utils.http;
 
 
 import com.asa.log.LoggerFactory;
 import com.asa.utils.EncodeConstants;
-import com.asa.weixin.spider.utils.http.handle.BaseHttpResponseHandle;
-import com.asa.weixin.spider.utils.http.handle.TextResponseHandle;
-import com.asa.weixin.spider.utils.http.handle.UploadResponseHandle;
+import com.asa.utils.http.handle.BaseHttpResponseHandle;
+import com.asa.utils.http.handle.TextResponseHandle;
+import com.asa.utils.http.handle.UploadResponseHandle;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHost;

@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.utils.http.handle;
+package com.asa.utils.http.handle;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;

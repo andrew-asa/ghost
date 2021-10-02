@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.utils.http;
+package com.asa.utils.http;
 
 
 import org.apache.http.client.methods.HttpDelete;

@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.utils.http;
+package com.asa.utils.http;
 
 import com.asa.utils.EncodeConstants;
 import org.apache.http.HttpEntity;

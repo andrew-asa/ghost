@@ -6,7 +6,7 @@ import com.asa.base.enent.EventDispatcher;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.StringUtils;
 import com.asa.weixin.spider.model.Cookies;
-import com.asa.weixin.spider.utils.URLUtils;
+import com.asa.utils.URLUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 

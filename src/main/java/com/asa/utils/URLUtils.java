@@ -1,6 +1,4 @@
-package com.asa.weixin.spider.utils;
-
-import com.asa.utils.MapUtils;
+package com.asa.utils;
 
 import java.net.URLDecoder;
 import java.util.HashMap;

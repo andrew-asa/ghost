@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.utils;
+package com.asa.utils;
 
 /**
  * @author andrew_asa
