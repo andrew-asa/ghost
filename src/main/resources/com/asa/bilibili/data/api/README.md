@@ -3,3 +3,5 @@
 由于使用通用的 JSON 格式存储，你可以使用这些文件用在其他语言。方便移植。
 
 你只需要标注一下该项目地址即可。无需通知我。
+
+@from https://github.com/MoyuScript/bilibili-api
