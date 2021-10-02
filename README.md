@@ -17,26 +17,26 @@
         </dependency>
 ```
 
-## 相关界面
+## 微信相关界面
 ###
 
 #### 扫描登录：
-![avatar](note/使用/登录.png)
+![avatar](note/weixin/使用/登录.png)
 
 #### 搜索公众号
-![avatar](note/使用/搜索公众号.png)
+![avatar](note/weixin/使用/搜索公众号.png)
 
 #### 公众号界面
-![avatar](note/使用/公众号界面.png)
+![avatar](note/weixin/使用/公众号界面.png)
 
 #### 收藏号界面
-![avatar](note/使用/收藏号界面.png)
+![avatar](note/weixin/使用/收藏号界面.png)
 
 #### 文章列表界面
-![avatar](note/使用/文章列表界面.png)
+![avatar](note/weixin/使用/文章列表界面.png)
 
 #### 文章列表界面
-![avatar](note/使用/文章阅读界面.png)
+![avatar](note/weixin/使用/文章阅读界面.png)
 
 
  

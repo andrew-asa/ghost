@@ -1,4 +1,4 @@
-package com.asa;
+package com.asa.base.ui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
