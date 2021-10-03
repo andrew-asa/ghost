@@ -1,5 +1,6 @@
 package com.asa.bilibili.service;
 
+import com.asa.bilibili.data.Credential;
 import com.asa.bilibili.lang.NoDataResponseException;
 import com.asa.bilibili.lang.RequireLoginException;
 import com.asa.bilibili.lang.ResponseCodeException;
@@ -27,16 +28,22 @@ public class BilibiliNetwork {
     private RestTemplate restTemplate = new RestTemplate();
 
 
-    public <T> T GET(String url, Map<String, Object> params, Class<T> responseTyp) {
+    public <T> T GET(String url, Map<String, Object> params,
+                     Credential credential,
+                     Class<T> responseTyp) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.USER_AGENT,
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36");
         headers.set(HttpHeaders.REFERER,
                     "https://www.bilibili.com");
+        if (credential != null) {
+            headers.set(HttpHeaders.COOKIE, credential.getCookieStr());
+        }
         if (params == null) {
             params = new HashMap<>();
         }
+
         if (MapUtils.isNotEmptyMap(params)) {
             url = addURIVariables(url, params.keySet().toArray(new String[0]));
         }
@@ -47,14 +54,29 @@ public class BilibiliNetwork {
         return body;
     }
 
+    public <T> T GET(String url, Credential credential, Class<T> responseTyp) {
+
+        return GET(url, (Map<String, Object>) null, (Credential) null, responseTyp);
+    }
+
     public <T> T GET(String url, Class<T> responseTyp) {
 
-        return GET(url, null, responseTyp);
+        return GET(url, (Credential) null, responseTyp);
+    }
+
+    public Map GET(String url, Map<String, Object> params, Credential credential) {
+
+        return GET(url, params, credential, Map.class);
     }
 
     public Map GET(String url, Map<String, Object> params) {
 
-        return GET(url, params, Map.class);
+        return GET(url, params, (Credential) null, Map.class);
+    }
+
+    public Map GET(String url, Credential credential) {
+
+        return GET(url, (Map<String, Object>) null, credential, Map.class);
     }
 
     public Map GET(String url) {
@@ -104,14 +126,14 @@ public class BilibiliNetwork {
             String msg = StringUtils.EMPTY;
             if (MapUtils.containsKey(map, "msg")) {
                 msg = String.valueOf(MapUtils.get(map, "msg"));
-            } else if(MapUtils.containsKey(map, "message")){
+            } else if (MapUtils.containsKey(map, "message")) {
                 msg = String.valueOf(MapUtils.get(map, "message"));
-            }else {
+            } else {
                 msg = "接口未返回错误信息";
             }
 
             // 具体异常匹配message -> 账号未登录
-            if (code == -101 || StringUtils.equals(msg,"账号未登录")) {
+            if (code == -101 || StringUtils.equals(msg, "账号未登录")) {
                 throw new RequireLoginException(msg);
             }
             throw new ResponseCodeException(msg);

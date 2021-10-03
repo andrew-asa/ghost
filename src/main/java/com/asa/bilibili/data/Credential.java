@@ -1,5 +1,9 @@
 package com.asa.bilibili.data;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
+
 /**
  * @author andrew_asa
  * @date 2021/10/2.
@@ -7,8 +11,12 @@ package com.asa.bilibili.data;
 public class Credential {
 
     private String SESSDATA;
+
     private String buvid3;
+
     private String bili_jct;
+
+    private String cookieStr;
 
     public String getSESSDATA() {
 
@@ -38,5 +46,40 @@ public class Credential {
     public void setBili_jct(String bili_jct) {
 
         this.bili_jct = bili_jct;
+    }
+
+    public Map<String, String> getCookies() {
+
+        Map<String, String> cookie = new HashMap<>();
+        cookie.put("SESSDATA", SESSDATA);
+        cookie.put("buvid3", buvid3);
+        cookie.put("bili_jct", bili_jct);
+        return cookie;
+    }
+
+    public String getCookiesStr() {
+
+        return cookieStr;
+    }
+
+    public String getCookieStr() {
+
+        return cookieStr;
+    }
+
+    public void setCookieStr(String cookieStr) {
+
+        this.cookieStr = cookieStr;
+    }
+
+    @Override
+    public String toString() {
+
+        return new StringJoiner(", ", Credential.class.getSimpleName() + "[", "]")
+                .add("SESSDATA='" + SESSDATA + "'")
+                .add("buvid3='" + buvid3 + "'")
+                .add("bili_jct='" + bili_jct + "'")
+                .add("cookieStr='" + cookieStr + "'")
+                .toString();
     }
 }

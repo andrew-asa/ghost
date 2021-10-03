@@ -27,6 +27,9 @@ public class RecommendService {
     @Autowired
     private BilibiliNetwork network;
 
+    @Autowired
+    private UserService userService;
+
     private Map api;
 
 
@@ -45,7 +48,7 @@ public class RecommendService {
     public List getRecommendUp() throws Exception {
 
         String url = ObjectMapUtils.getString(api, "info", "recommend_up_user", "url");
-        Map mu = network.GET(url);
+        Map mu = network.GET(url,userService.getCredential());
         return network.unpackResponseListData(mu);
     }
 }

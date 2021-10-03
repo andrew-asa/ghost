@@ -1,5 +1,6 @@
 package com.asa.bilibili.service;
 
+import com.asa.bilibili.data.Credential;
 import com.asa.log.LoggerFactory;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -34,6 +35,12 @@ public class UserServiceTest extends TestCase {
     public void testGetRelationInfo() throws Exception{
         Map map = service.getRelationInfo("77859059");
         LoggerFactory.getLogger().debug("---getRelationInfo {}--=",map);
+    }
+
+    @Test
+    public void testGetCredential() {
+        Credential credential =  service.getCredential();
+        System.out.println(credential);
     }
 
     @SpringBootApplication(scanBasePackages = "com.asa.bilibili")

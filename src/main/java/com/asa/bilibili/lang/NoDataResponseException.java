@@ -7,7 +7,7 @@ import com.asa.utils.StringUtils;
  * @author andrew_asa
  * @date 2021/10/2.
  */
-public class NoDataResponseException extends AbstractException {
+public class NoDataResponseException extends BilibiliAbstractException {
 
     public static final String ERROR_CODE = StringUtils.EMPTY;
 

@@ -1,11 +1,20 @@
 package com.asa.bilibili.service;
 
+import com.asa.base.utils.ObjectMapperUtils;
 import com.asa.bilibili.data.Credential;
+import com.asa.utils.MapUtils;
 import com.asa.utils.ObjectMapUtils;
+import com.asa.utils.io.ClassPathResource;
+import com.asa.utils.io.FileSystemResource;
+import com.asa.utils.io.IOUtils;
+import com.asa.utils.io.Resource;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +34,8 @@ public class UserService {
     private Map api;
 
     private Map userInfoApi;
+
+    private Credential credential;
 
     @PostConstruct
     public void init() {
@@ -72,5 +83,47 @@ public class UserService {
         params.put("vmid", vmid);
         Map relation = network.GET(url, params);
         return network.unpackResponseMapData(relation);
+    }
+
+    public Credential getCredential() {
+
+        if (credential != null) {
+            return credential;
+        }
+        InputStream in = null;
+        try {
+            in = getCookieStream();
+            ObjectMapper mapper = ObjectMapperUtils.getDefaultMapper();
+            Map map = mapper.readValue(in, Map.class);
+            if (MapUtils.isNotEmptyMap(map)) {
+                Credential credential = new Credential();
+                credential.setSESSDATA(ObjectMapUtils.getString(map, "SESSDATA"));
+                credential.setBuvid3(ObjectMapUtils.getString(map, "buvid3"));
+                credential.setBili_jct(ObjectMapUtils.getString(map, "bili_jct"));
+                credential.setCookieStr(ObjectMapUtils.getString(map, "cookieStr"));
+                setCredential(credential);
+            }
+        } catch (Exception e) {
+            invalidCredential();
+        } finally {
+            IOUtils.closeQuietly(in);
+        }
+        return credential;
+    }
+
+    private InputStream getCookieStream() throws Exception {
+
+        Resource resource = new FileSystemResource("bilibili_cookie.txt");
+        return resource.getInputStream();
+    }
+
+    public void invalidCredential() {
+
+        credential = null;
+    }
+
+    public void setCredential(Credential credential) {
+
+        this.credential = credential;
     }
 }
