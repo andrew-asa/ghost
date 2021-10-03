@@ -32,15 +32,25 @@ public class UserServiceTest extends TestCase {
     }
 
     @Test
-    public void testGetRelationInfo() throws Exception{
+    public void testGetRelationInfo() throws Exception {
+
         Map map = service.getRelationInfo("77859059");
-        LoggerFactory.getLogger().debug("---getRelationInfo {}--=",map);
+        LoggerFactory.getLogger().debug("---getRelationInfo {}--=", map);
     }
 
     @Test
     public void testGetCredential() {
-        Credential credential =  service.getCredential();
+
+        Credential credential = service.getCredential();
         System.out.println(credential);
+    }
+
+    @Test
+    public void testGetFollowings() {
+
+        Credential credential = service.getCredential();
+        Map f = service.getFollowings(credential.getVmid(), credential, 1);
+        System.out.println(f);
     }
 
     @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
@@ -49,9 +59,9 @@ public class UserServiceTest extends TestCase {
     }
 
     @Test
-    public void testGetUserInfo() throws Exception{
+    public void testGetUserInfo() throws Exception {
 
         Map map = service.getUserInfo("77859059");
-        LoggerFactory.getLogger().debug("---userinfo {}--=",map);
+        LoggerFactory.getLogger().debug("---userinfo {}--=", map);
     }
 }

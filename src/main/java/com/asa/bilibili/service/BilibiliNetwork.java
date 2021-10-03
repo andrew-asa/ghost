@@ -91,7 +91,7 @@ public class BilibiliNetwork {
         if (uriVariables.length > 0) {
             ret.append("?");
             for (String uriVariable : uriVariables) {
-                ret.append(uriVariable + "={" + uriVariable + "}");
+                ret.append(uriVariable + "={" + uriVariable + "}&");
             }
         }
         return ret.toString();

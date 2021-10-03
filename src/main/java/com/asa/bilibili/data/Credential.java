@@ -10,6 +10,11 @@ import java.util.StringJoiner;
  */
 public class Credential {
 
+    /**
+     * 当前用户id
+     */
+    private String vmid;
+
     private String SESSDATA;
 
     private String buvid3;
@@ -72,10 +77,21 @@ public class Credential {
         this.cookieStr = cookieStr;
     }
 
+    public String getVmid() {
+
+        return vmid;
+    }
+
+    public void setVmid(String vmid) {
+
+        this.vmid = vmid;
+    }
+
     @Override
     public String toString() {
 
         return new StringJoiner(", ", Credential.class.getSimpleName() + "[", "]")
+                .add("vmid='" + vmid + "'")
                 .add("SESSDATA='" + SESSDATA + "'")
                 .add("buvid3='" + buvid3 + "'")
                 .add("bili_jct='" + bili_jct + "'")

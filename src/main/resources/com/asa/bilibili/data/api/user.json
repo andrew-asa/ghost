@@ -186,6 +186,18 @@
       },
       "comment": "用户关系操作"
     },
+    "batch_modify": {
+      "url": "https://api.bilibili.com/x/relation/batch/modify",
+      "method": "POST",
+      "verify": true,
+      "data": {
+        "re_src": "const int: 151",
+        "fids": "25910292,490875481 ... 用户数组",
+        "act": "int: 1 关注 2 取关 3 悄悄关注 5 拉黑 6 取消拉黑 7 移除粉丝",
+        "csrf": "6bb15267cfb001304adaa2195b7ee869"
+      },
+      "comment": "批量用户关系操作"
+    },
     "send_msg": {
       "url": "https://api.vc.bilibili.com/web_im/v1/web_im/send_msg",
       "method": "POST",
