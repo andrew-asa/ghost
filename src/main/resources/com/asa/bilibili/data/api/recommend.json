@@ -1,0 +1,11 @@
+{
+  "info": {
+    "recommend_up_user": {
+      "url": "https://api.bilibili.com/x/relation/recommend/answer_ok?re_src=14&pagesize=8&main_tids=&sub_tids=",
+      "method": "GET",
+      "params": {
+      },
+      "comment": "推荐up主"
+    }
+  }
+}
