@@ -89,14 +89,42 @@ public class UserService {
         return network.unpackResponseMapData(relation);
     }
 
+
     /**
-     * 获取用户的关注者
+     * @param uid               用户id
+     * @param offset_dynamic_id 该值为第一次调用本方法时，数据中会有个 next_offset 字段，
+     *                          指向下一动态列表第一条动态（类似单向链表）。
+     *                          根据上一次获取结果中的 next_offset 字段值，
+     *                          循环填充该值即可获取到全部动态。
+     *                          0 为从头开始。
+     *                          Defaults to 0.
+     * @param need_top          显示置顶动态 0 不需要, 1 需要
+     * @return
+     */
+    public Map getDynamic(String uid, String offset_dynamic_id, int need_top) throws Exception{
+
+        String url = ObjectMapUtils.getString(api, "info", "dynamic", "url");
+        Map<String, Object> params = new HashMap<>();
+        params.put("host_uid", uid);
+        params.put("offset_dynamic_id", offset_dynamic_id);
+        params.put("need_top", need_top);
+        Map dynamic = network.GET(url, params, credential);
+        return network.unpackResponseMapData(dynamic);
+    }
+
+    public Map getDynamic(String uid, String offset_dynamic_id) throws Exception{
+
+        return getDynamic(uid, offset_dynamic_id, 0);
+    }
+
+    /**
+     * 获取用户的关注者列表
      *
-     * @param vmid
-     * @param credential
-     * @param ps
-     * @param pn
-     * @param order
+     * @param vmid       用户id
+     * @param credential 用户凭证
+     * @param ps         每页大小
+     * @param pn         页码
+     * @param order      排序方式
      * @return
      */
     public Map getFollowings(String vmid, Credential credential, int ps, int pn, String order) throws Exception {

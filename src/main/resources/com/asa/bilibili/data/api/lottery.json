@@ -1,4 +1,13 @@
 {
   "info": {
+    "lottery_notice": {
+      "url": "https://api.vc.bilibili.com/lottery_svr/v1/lottery_svr/lottery_notice",
+      "method": "GET",
+      "verify": false,
+      "params": {
+        "dynamic_id": "动态id号"
+      },
+      "comment": "获取抽奖通知"
+    }
   }
 }

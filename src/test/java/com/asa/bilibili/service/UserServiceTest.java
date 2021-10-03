@@ -46,11 +46,34 @@ public class UserServiceTest extends TestCase {
     }
 
     @Test
-    public void testGetFollowings() {
+    public void testGetFollowings() throws Exception{
 
         Credential credential = service.getCredential();
         Map f = service.getFollowings(credential.getVmid(), credential, 1);
         System.out.println(f);
+    }
+
+    @Test
+    public void testGetDynamic() throws Exception{
+
+        Map map = service.getDynamic("2435767", "0");
+        System.out.println(map);
+    }
+
+    public void testTestGetDynamic() {
+
+    }
+
+    public void testGetSelfFollowings() {
+
+    }
+
+    public void testTestGetSelfFollowings() {
+
+    }
+
+    public void testSetCredential() {
+
     }
 
     @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
