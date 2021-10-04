@@ -181,9 +181,9 @@ public class UserService {
             if (MapUtils.isNotEmptyMap(map)) {
                 Credential credential = new Credential();
                 credential.setVmid(ObjectMapUtils.getString(map, "vmid"));
-                credential.setSESSDATA(ObjectMapUtils.getString(map, "SESSDATA"));
-                credential.setBuvid3(ObjectMapUtils.getString(map, "buvid3"));
-                credential.setBili_jct(ObjectMapUtils.getString(map, "bili_jct"));
+                //credential.setSESSDATA(ObjectMapUtils.getString(map, "SESSDATA"));
+                //credential.setBuvid3(ObjectMapUtils.getString(map, "buvid3"));
+                //credential.setBili_jct(ObjectMapUtils.getString(map, "bili_jct"));
                 credential.setCookieStr(ObjectMapUtils.getString(map, "cookieStr"));
                 setCredential(credential);
             }

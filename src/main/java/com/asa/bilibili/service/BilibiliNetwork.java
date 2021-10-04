@@ -11,7 +11,10 @@ import org.jsoup.internal.StringUtil;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -27,10 +30,7 @@ public class BilibiliNetwork {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-
-    public <T> T GET(String url, Map<String, Object> params,
-                     Credential credential,
-                     Class<T> responseTyp) {
+    private HttpHeaders customRequireHeader(Credential credential) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.USER_AGENT,
@@ -40,10 +40,44 @@ public class BilibiliNetwork {
         if (credential != null) {
             headers.set(HttpHeaders.COOKIE, credential.getCookieStr());
         }
+        return headers;
+    }
+
+    public <T> T POST(String url, Map<String, Object> data,
+                      Credential credential,
+                      Class<T> responseTyp) {
+
+        HttpHeaders headers = customRequireHeader(credential);
+        headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+        MultiValueMap<String,Object> sendData = new LinkedMultiValueMap<>();
+        if (MapUtils.isNotEmptyMap(data)) {
+            sendData.setAll(data);
+        }
+        if (credential != null) {
+            sendData.add("csrf", credential.getBili_jct());
+            sendData.add("csrf_token", credential.getBili_jct());
+        }
+        HttpEntity request = new HttpEntity(sendData, headers);
+        HttpEntity<T> res = restTemplate.postForEntity(url, request, responseTyp);
+        T body = res.getBody();
+        return body;
+    }
+
+    public Map POST(String url, Map<String, Object> data,
+                    Credential credential) {
+
+        return POST(url, data, credential, Map.class);
+    }
+
+
+    public <T> T GET(String url, Map<String, Object> params,
+                     Credential credential,
+                     Class<T> responseTyp) {
+
+        HttpHeaders headers = customRequireHeader(credential);
         if (params == null) {
             params = new HashMap<>();
         }
-
         if (MapUtils.isNotEmptyMap(params)) {
             url = addURIVariables(url, params.keySet().toArray(new String[0]));
         }
@@ -139,5 +173,14 @@ public class BilibiliNetwork {
             throw new ResponseCodeException(msg);
         }
         return MapUtils.get(map, "data");
+    }
+
+    public Map<String, String> strToCookies(String str) {
+
+        Map ret = new HashMap();
+        if (StringUtils.isNotEmpty(str)) {
+            String[] cookies = str.split(";");
+        }
+        return ret;
     }
 }

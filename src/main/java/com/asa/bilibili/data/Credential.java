@@ -1,7 +1,9 @@
 package com.asa.bilibili.data;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.asa.base.model.Cookie;
+import com.asa.base.model.Cookies;
+import com.asa.utils.StringUtils;
+
 import java.util.StringJoiner;
 
 /**
@@ -15,51 +17,56 @@ public class Credential {
      */
     private String vmid;
 
-    private String SESSDATA;
-
-    private String buvid3;
-
+    //private String SESSDATA;
+    //
+    //private String buvid3;
+    //
     private String bili_jct;
 
     private String cookieStr;
 
-    public String getSESSDATA() {
+    private Cookies cookies;
 
-        return SESSDATA;
-    }
-
-    public void setSESSDATA(String SESSDATA) {
-
-        this.SESSDATA = SESSDATA;
-    }
-
-    public String getBuvid3() {
-
-        return buvid3;
-    }
-
-    public void setBuvid3(String buvid3) {
-
-        this.buvid3 = buvid3;
-    }
-
+    //public String getSESSDATA() {
+    //
+    //    return SESSDATA;
+    //}
+    //
+    //public void setSESSDATA(String SESSDATA) {
+    //
+    //    this.SESSDATA = SESSDATA;
+    //}
+    //
+    //public String getBuvid3() {
+    //
+    //    return buvid3;
+    //}
+    //
+    //public void setBuvid3(String buvid3) {
+    //
+    //    this.buvid3 = buvid3;
+    //}
+    //
     public String getBili_jct() {
 
-        return bili_jct;
+        String ret = StringUtils.EMPTY;
+        if (cookies != null) {
+            Cookie cookie = cookies.getFirst("bili_jct");
+            if (cookie != null) {
+                ret = cookie.getValue();
+            }
+        }
+        return ret;
     }
+    //
+    //public void setBili_jct(String bili_jct) {
+    //
+    //    this.bili_jct = bili_jct;
+    //}
 
-    public void setBili_jct(String bili_jct) {
+    public Cookies getCookies() {
 
-        this.bili_jct = bili_jct;
-    }
-
-    public Map<String, String> getCookies() {
-
-        Map<String, String> cookie = new HashMap<>();
-        cookie.put("SESSDATA", SESSDATA);
-        cookie.put("buvid3", buvid3);
-        cookie.put("bili_jct", bili_jct);
-        return cookie;
+        return cookies;
     }
 
     public String getCookiesStr() {
@@ -74,6 +81,10 @@ public class Credential {
 
     public void setCookieStr(String cookieStr) {
 
+        if (StringUtils.isNotEmpty(cookieStr)) {
+            cookies = new Cookies();
+            cookies.readFromString(cookieStr);
+        }
         this.cookieStr = cookieStr;
     }
 
@@ -92,9 +103,9 @@ public class Credential {
 
         return new StringJoiner(", ", Credential.class.getSimpleName() + "[", "]")
                 .add("vmid='" + vmid + "'")
-                .add("SESSDATA='" + SESSDATA + "'")
-                .add("buvid3='" + buvid3 + "'")
-                .add("bili_jct='" + bili_jct + "'")
+                //.add("SESSDATA='" + SESSDATA + "'")
+                //.add("buvid3='" + buvid3 + "'")
+                //.add("bili_jct='" + bili_jct + "'")
                 .add("cookieStr='" + cookieStr + "'")
                 .toString();
     }

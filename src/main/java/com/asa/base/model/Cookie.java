@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.model;
+package com.asa.base.model;
 
 import java.util.Date;
 

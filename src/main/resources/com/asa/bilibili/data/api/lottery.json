@@ -9,5 +9,32 @@
       },
       "comment": "获取抽奖通知"
     }
-  }
+  },
+  "operation": {
+    "dynamic_id": "0",
+    "type": 4,
+    "rid": 0,
+    "content": "依然新会，妙处难与君说。",
+    "up_choose_comment": 0,
+    "up_close_comment": 0,
+    "extension": "{\"emoji_type\":1,\"from\":{\"emoji_type\":1},\"flag_cfg\":{}}",
+    "at_uids": "",
+    "ctrl": "[]",
+    "csrf_token": "d20961840c13d0f97801148e90be82eb",
+    "csrf": "d20961840c13d0f97801148e90be82eb"
+  },
+
+  curl -x POST -d '{
+  "dynamic_id": "0",
+  "type": 4,
+  "rid": 0,
+  "content": "依然新会，妙处难与君说。1",
+  "up_choose_comment": 0,
+  "up_close_comment": 0,
+  "extension": "{\"emoji_type\":1,\"from\":{\"emoji_type\":1},\"flag_cfg\":{}}",
+  "at_uids": "",
+  "ctrl": "[]",
+  "csrf_token": "d20961840c13d0f97801148e90be82eb",
+  "csrf": "d20961840c13d0f97801148e90be82eb"
+}' --cookie "l=v; bp_t_offset_1053763310=577373870950065664; bsource=search_baidu; PVID=1; dy_spec_agreed=1; bp_video_offset_1053763310=577332656437050472; buvid_fp_plain=6A910432-7FB8-4BC1-B4EF-B62E9EDEF363167627infoc; fingerprint=b8382974eb2e240b5dd06661c2b62f49; innersign=0; CURRENT_FNVAL=976; blackside_state=1; DedeUserID=1053763310; DedeUserID__ckMd5=895d39a364e7dd01; SESSDATA=43e3bcce%2C1648817528%2C5f812%2Aa1; bili_jct=d20961840c13d0f97801148e90be82eb; sid=7u7rr3hl; buvid_fp=6A910432-7FB8-4BC1-B4EF-B62E9EDEF363167627infoc; fingerprint3=6cf9be6e244dbff65930bf2ba25c6466; fingerprint_s=1501bd5859469fc0a94a7c238e4bdb8b; LIVE_BUVID=AUTO2416332644615198; rpdid=|(J|kmuulu)R0J'uYJJkkumku; _uuid=C7A5960A-FCF3-B3CB-DA0C-97EFFD5FCB2008364infoc; buvid3=6A910432-7FB8-4BC1-B4EF-B62E9EDEF363167627infoc; b_ut=-1; i-wanna-go-back=1"
 }
