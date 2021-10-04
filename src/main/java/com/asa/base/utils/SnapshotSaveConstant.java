@@ -1,4 +1,4 @@
-package com.asa.utils;
+package com.asa.base.utils;
 
 /**
  * @author andrew_asa

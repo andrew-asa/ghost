@@ -4,9 +4,8 @@ import com.asa.base.utils.ObjectMapperUtils;
 import com.asa.bilibili.constant.Constant;
 import com.asa.bilibili.data.Credential;
 import com.asa.utils.MapUtils;
-import com.asa.utils.ObjectMapUtils;
+import com.asa.base.utils.ObjectMapUtils;
 import com.asa.utils.StringUtils;
-import com.asa.utils.io.ClassPathResource;
 import com.asa.utils.io.FileSystemResource;
 import com.asa.utils.io.IOUtils;
 import com.asa.utils.io.Resource;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;

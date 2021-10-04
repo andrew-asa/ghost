@@ -1,5 +1,6 @@
 package com.asa.utils;
 
+import com.asa.base.utils.ObjectMapUtils;
 import junit.framework.TestCase;
 import org.junit.Assert;
 

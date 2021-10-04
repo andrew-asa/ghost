@@ -6,7 +6,7 @@ import com.asa.base.enent.EventDispatcher;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.StringUtils;
 import com.asa.base.model.Cookies;
-import com.asa.utils.URLUtils;
+import com.asa.base.utils.URLUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 

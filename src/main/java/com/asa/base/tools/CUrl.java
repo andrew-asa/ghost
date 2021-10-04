@@ -1,4 +1,4 @@
-package com.asa.utils;
+package com.asa.base.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

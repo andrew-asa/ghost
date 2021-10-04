@@ -1,5 +1,6 @@
 package com.asa.utils;
 
+import com.asa.base.tools.CUrl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;

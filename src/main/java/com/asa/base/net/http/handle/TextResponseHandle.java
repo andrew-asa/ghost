@@ -1,4 +1,4 @@
-package com.asa.utils.http.handle;
+package com.asa.base.net.http.handle;
 
 
 import org.apache.http.HttpEntity;

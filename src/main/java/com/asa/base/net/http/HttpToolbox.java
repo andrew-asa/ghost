@@ -1,11 +1,11 @@
-package com.asa.utils.http;
+package com.asa.base.net.http;
 
 
+import com.asa.base.net.http.handle.BaseHttpResponseHandle;
+import com.asa.base.net.http.handle.UploadResponseHandle;
 import com.asa.log.LoggerFactory;
 import com.asa.utils.EncodeConstants;
-import com.asa.utils.http.handle.BaseHttpResponseHandle;
-import com.asa.utils.http.handle.TextResponseHandle;
-import com.asa.utils.http.handle.UploadResponseHandle;
+import com.asa.base.net.http.handle.TextResponseHandle;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHost;

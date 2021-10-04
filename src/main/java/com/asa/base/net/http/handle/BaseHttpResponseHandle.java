@@ -1,4 +1,4 @@
-package com.asa.utils.http.handle;
+package com.asa.base.net.http.handle;
 import com.asa.utils.EncodeConstants;
 import org.apache.http.client.methods.CloseableHttpResponse;
 

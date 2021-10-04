@@ -1,4 +1,4 @@
-package com.asa.utils.http;
+package com.asa.base.net.http;
 
 
 import org.apache.http.client.methods.HttpDelete;
