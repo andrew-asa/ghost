@@ -1,5 +1,6 @@
 package com.asa.bilibili.service;
 
+import com.asa.base.utils.ObjectMapUtils;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DynamicServiceTest extends TestCase {
+
 
 
 
@@ -41,6 +43,12 @@ public class DynamicServiceTest extends TestCase {
     public void testInstantText() throws Exception{
 
         Map ret = service.instantText(userService.getCredential(), "春事已不及，江行复茫然");
+        System.out.println(ret);
+    }
+
+    @Test
+    public void testRemoveDynamic() throws Exception{
+        Map ret = service.removeDynamic(userService.getCredential(), "577581730181038275");
         System.out.println(ret);
     }
 }

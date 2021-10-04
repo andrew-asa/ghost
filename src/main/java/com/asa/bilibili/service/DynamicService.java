@@ -47,6 +47,13 @@ public class DynamicService {
         return null;
     }
 
+    /**
+     * 插入动态文本
+     * @param credential
+     * @param text
+     * @return  {"result":0,"errmsg":"; Create dynamic:577581730181038275, res:0, result:1; Push create kafka:0; Push create databus:0; Register comment result:0; Add outbox result:1","dynamic_id":577581730181038275,"create_result":1,"dynamic_id_str":"577581730181038275","_gt_":0}
+     * @throws Exception
+     */
     public Map instantText(Credential credential, String text) throws Exception {
 
         String url = ObjectMapUtils.getString(api, "send", "instant_text", "url");
@@ -63,8 +70,39 @@ public class DynamicService {
         return network.unpackResponseMapData(ret);
     }
 
+    public Map instantText(String text) throws Exception {
+
+        return instantText(userService.getCredential(), text);
+    }
+
     public Object parse_at(String text) {
 
         return null;
+    }
+
+    /**
+     * 删除动态
+     * @param credential    用户凭证
+     * @param dynamic_id    动态id
+     * @return
+     * @throws Exception
+     */
+    public Map removeDynamic(Credential credential,String dynamic_id) throws Exception{
+        String url = ObjectMapUtils.getString(api, "operate", "delete", "url");
+        Map<String, Object> data = new HashMap<>();
+        data.put("dynamic_id", dynamic_id);
+        Map ret = network.POST(url, data, credential);
+        return network.unpackResponseMapData(ret);
+    }
+
+    /**
+     * 删除动态
+     * @param dynamic_id
+     * @return
+     * @throws Exception
+     */
+    public Map removeDynamic(String dynamic_id) throws Exception{
+
+        return removeDynamic(userService.getCredential(), dynamic_id);
     }
 }
