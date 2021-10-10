@@ -1,6 +1,6 @@
 package com.asa.browser.interrupt;
 
-import com.asa.utils.io.IOUtils;
+import com.asa.base.utils.io.IOUtils;
 import junit.framework.TestCase;
 import org.springframework.core.io.ClassPathResource;
 

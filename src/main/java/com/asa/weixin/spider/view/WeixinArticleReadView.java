@@ -1,7 +1,7 @@
 package com.asa.weixin.spider.view;
 
 import com.asa.base.enent.Event;
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 import com.asa.weixin.spider.controller.SearchItem;
 import com.asa.weixin.spider.model.WeixinArticle;
 import de.felixroske.jfxsupport.AbstractFxmlView;

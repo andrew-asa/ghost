@@ -1,6 +1,6 @@
 package com.asa.base.utils;
 
-import com.asa.utils.io.FilenameUtils;
+import com.asa.base.utils.io.FilenameUtils;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 

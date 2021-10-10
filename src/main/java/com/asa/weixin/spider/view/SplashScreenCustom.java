@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.view;
 
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import de.felixroske.jfxsupport.SplashScreen;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

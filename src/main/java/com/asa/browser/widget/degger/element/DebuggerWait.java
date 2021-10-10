@@ -1,6 +1,6 @@
 package com.asa.browser.widget.degger.element;
 
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import javafx.application.Platform;
 
 import java.time.Clock;

@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.controller;
 
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TableCell;
 

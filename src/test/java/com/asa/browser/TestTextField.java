@@ -1,6 +1,6 @@
 package com.asa.browser;
 
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.application.Application;

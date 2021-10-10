@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.view;
 
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 import de.felixroske.jfxsupport.AbstractFxmlView;
 import de.felixroske.jfxsupport.FXMLView;
 

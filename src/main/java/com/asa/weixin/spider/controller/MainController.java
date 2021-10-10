@@ -4,8 +4,8 @@ import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
 
-import com.asa.log.LoggerFactory;
-import com.asa.utils.StringUtils;
+import com.asa.base.log.LoggerFactory;
+import com.asa.base.utils.StringUtils;
 import com.asa.weixin.spider.Spider;
 import com.asa.weixin.spider.view.HomePagePaneView;
 import com.asa.weixin.spider.view.MainViewContent;

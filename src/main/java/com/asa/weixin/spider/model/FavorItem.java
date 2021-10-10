@@ -1,7 +1,7 @@
 package com.asa.weixin.spider.model;
 
 
-import com.asa.utils.Validate;
+import com.asa.base.utils.Validate;
 
 import java.util.ArrayList;
 import java.util.List;

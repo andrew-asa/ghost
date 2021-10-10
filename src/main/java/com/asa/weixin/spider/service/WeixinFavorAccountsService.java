@@ -1,7 +1,7 @@
 package com.asa.weixin.spider.service;
 
-import com.asa.utils.ListUtils;
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.ListUtils;
+import com.asa.base.utils.StringUtils;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
 import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveDao;
 import com.asa.weixin.spider.model.WeixinSpiderSnapshotSaveEntity;

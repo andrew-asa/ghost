@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.model;
 
-import com.asa.utils.ListUtils;
+import com.asa.base.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;

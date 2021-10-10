@@ -1,6 +1,6 @@
 package com.asa.browser.base;
 
-import com.asa.utils.BooleanUtils;
+import com.asa.base.utils.BooleanUtils;
 
 /**
  * @author andrew_asa

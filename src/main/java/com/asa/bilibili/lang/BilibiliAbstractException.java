@@ -1,6 +1,7 @@
 package com.asa.bilibili.lang;
 
-import com.asa.exception.AbstractException;
+
+import com.asa.base.exception.AbstractException;
 
 /**
  * @author andrew_asa

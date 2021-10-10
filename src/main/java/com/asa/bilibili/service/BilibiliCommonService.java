@@ -1,9 +1,10 @@
 package com.asa.bilibili.service;
 
-import com.asa.utils.MapUtils;
-import com.asa.utils.StringUtils;
-import com.asa.utils.io.ClassPathResource;
-import com.asa.utils.io.IOUtils;
+
+import com.asa.base.utils.MapUtils;
+import com.asa.base.utils.StringUtils;
+import com.asa.base.utils.io.ClassPathResource;
+import com.asa.base.utils.io.IOUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 

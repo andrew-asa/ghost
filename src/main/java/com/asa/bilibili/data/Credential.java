@@ -2,7 +2,7 @@ package com.asa.bilibili.data;
 
 import com.asa.base.model.Cookie;
 import com.asa.base.model.Cookies;
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 
 import java.util.StringJoiner;
 

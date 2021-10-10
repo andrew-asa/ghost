@@ -1,6 +1,6 @@
 package com.asa.base.net.http;
 
-import com.asa.utils.EncodeConstants;
+import com.asa.base.utils.EncodeConstants;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 

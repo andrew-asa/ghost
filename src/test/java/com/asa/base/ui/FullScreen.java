@@ -1,6 +1,6 @@
 package com.asa.base.ui;
 
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;

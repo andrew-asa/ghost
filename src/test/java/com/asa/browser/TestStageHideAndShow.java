@@ -1,6 +1,6 @@
 package com.asa.browser;
 
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import com.tulskiy.keymaster.common.HotKey;
 import com.tulskiy.keymaster.common.HotKeyListener;
 import com.tulskiy.keymaster.common.Provider;

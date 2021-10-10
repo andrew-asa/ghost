@@ -1,7 +1,7 @@
 package com.asa.bilibili.service;
 
 import com.asa.bilibili.data.Credential;
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

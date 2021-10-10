@@ -1,7 +1,7 @@
 package com.asa.weixin.spider.controller;
 
-import com.asa.log.LoggerFactory;
-import com.asa.utils.StringUtils;
+import com.asa.base.log.LoggerFactory;
+import com.asa.base.utils.StringUtils;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

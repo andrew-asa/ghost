@@ -1,6 +1,6 @@
 package com.asa.base.utils;
 
-import com.asa.utils.MapUtils;
+import com.asa.base.utils.MapUtils;
 
 import java.net.URLDecoder;
 import java.util.HashMap;

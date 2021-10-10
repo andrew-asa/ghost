@@ -1,8 +1,8 @@
 package com.asa.browser.interrupt;
 
-import com.asa.log.LoggerFactory;
-import com.asa.utils.StringUtils;
-import com.asa.utils.io.IOUtils;
+import com.asa.base.log.LoggerFactory;
+import com.asa.base.utils.StringUtils;
+import com.asa.base.utils.io.IOUtils;
 import javafx.concurrent.Worker;
 import javafx.scene.web.WebEngine;
 import org.springframework.core.io.ClassPathResource;

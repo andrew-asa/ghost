@@ -1,7 +1,7 @@
 package com.asa.weixin.spider;
 
-import com.asa.log.LoggerFactory;
-import com.asa.utils.StringUtils;
+import com.asa.base.log.LoggerFactory;
+import com.asa.base.utils.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.internal.StringUtil;
 import org.jsoup.nodes.Document;

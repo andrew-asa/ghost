@@ -3,7 +3,7 @@ package com.asa.weixin.spider.controller;
 import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import com.asa.weixin.spider.model.WeixinPublicAccount;
 import com.asa.weixin.spider.service.WeixinSearchService;
 import de.felixroske.jfxsupport.FXMLController;

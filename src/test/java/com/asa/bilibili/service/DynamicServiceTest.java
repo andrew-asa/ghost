@@ -1,6 +1,5 @@
 package com.asa.bilibili.service;
 
-import com.asa.base.utils.ObjectMapUtils;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +20,10 @@ public class DynamicServiceTest extends TestCase {
 
 
 
+    @Test
+    public void testRepost() {
+
+    }
 
     @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
     static class InnerConfig {

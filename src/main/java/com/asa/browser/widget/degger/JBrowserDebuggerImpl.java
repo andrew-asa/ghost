@@ -3,9 +3,9 @@ package com.asa.browser.widget.degger;
 import com.asa.browser.base.JBrowserDebugger;
 import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.selector.By;
-import com.asa.log.LoggerFactory;
-import com.asa.utils.ListUtils;
-import com.asa.utils.StringUtils;
+import com.asa.base.log.LoggerFactory;
+import com.asa.base.utils.ListUtils;
+import com.asa.base.utils.StringUtils;
 import com.sun.webkit.network.CookieManager;
 import javafx.scene.web.WebEngine;
 

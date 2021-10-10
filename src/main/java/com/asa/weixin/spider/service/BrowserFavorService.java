@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.service;
 
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.StringUtils;
 import com.asa.weixin.spider.model.FavorItem;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

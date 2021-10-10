@@ -7,7 +7,7 @@ import com.asa.browser.Browser;
 import com.asa.browser.base.JBrowserDebugger;
 import com.asa.browser.widget.degger.element.WebElement;
 import com.asa.browser.widget.degger.selector.By;
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import com.asa.weixin.spider.service.WeixinLoginService;
 import com.asa.weixin.spider.view.HomePagePaneView;
 import com.asa.weixin.spider.view.WeixinLoginPaneView;

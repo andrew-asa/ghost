@@ -1,8 +1,8 @@
 package com.asa.base.model;
 
-import com.asa.utils.ListUtils;
-import com.asa.utils.MapUtils;
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.ListUtils;
+import com.asa.base.utils.MapUtils;
+import com.asa.base.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;

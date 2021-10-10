@@ -1,6 +1,6 @@
 package com.asa.weixin.spider.service;
 
-import com.asa.log.LoggerFactory;
+import com.asa.base.log.LoggerFactory;
 import com.asa.weixin.spider.model.WeixinArticle;
 import org.springframework.stereotype.Component;
 

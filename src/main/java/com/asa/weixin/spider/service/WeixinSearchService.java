@@ -1,9 +1,9 @@
 package com.asa.weixin.spider.service;
 
-import com.asa.utils.ListUtils;
-import com.asa.utils.MapBuilder;
-import com.asa.utils.MapUtils;
-import com.asa.utils.StringUtils;
+import com.asa.base.utils.ListUtils;
+import com.asa.base.utils.MapBuilder;
+import com.asa.base.utils.MapUtils;
+import com.asa.base.utils.StringUtils;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.model.WeixinArticlesInfo;
 import com.asa.weixin.spider.model.WeixinPublicAccount;

@@ -1,5 +1,5 @@
 package com.asa.base.net.http.handle;
-import com.asa.utils.EncodeConstants;
+import com.asa.base.utils.EncodeConstants;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
 import java.io.IOException;
