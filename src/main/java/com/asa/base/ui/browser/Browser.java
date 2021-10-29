@@ -10,7 +10,7 @@ import com.asa.base.ui.browser.widget.console.JConsole;
 import com.asa.base.ui.browser.widget.degger.JBrowserDebuggerImpl;
 import com.asa.base.utils.ListUtils;
 import com.asa.base.utils.StringUtils;
-import com.asa.weixin.spider.Spider;
+import com.asa.ghost.weixin.spider.Spider;
 import javafx.collections.ObservableList;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;

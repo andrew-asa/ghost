@@ -1,4 +1,4 @@
-package com.asa.weixin.spider.service;
+package com.asa.ghost.weixin.spider.service;
 
 import junit.framework.TestCase;
 import org.springframework.core.io.ClassPathResource;

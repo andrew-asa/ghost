@@ -19,7 +19,7 @@ public class BrowserInterrupt {
 
     private WebEngine webEngine;
 
-    private List<String> defaultJs = Arrays.asList("com/asa/browser/interrupt.js", "com/asa/browser/ghost_base.js");
+    private List<String> defaultJs = Arrays.asList("com/asa/base/ui/browser/interrupt.js", "com/asa/browser/ghost_base.js");
 
     public BrowserInterrupt(WebEngine webEngine) {
 

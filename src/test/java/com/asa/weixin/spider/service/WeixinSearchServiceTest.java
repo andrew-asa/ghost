@@ -1,6 +1,6 @@
-package com.asa.weixin.spider.service;
+package com.asa.ghost.weixin.spider.service;
 
-import com.asa.weixin.spider.model.WeixinArticlesInfo;
+import com.asa.ghost.weixin.spider.model.WeixinArticlesInfo;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.BeforeClass;

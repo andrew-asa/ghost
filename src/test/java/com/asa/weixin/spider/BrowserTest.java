@@ -1,4 +1,4 @@
-package com.asa.weixin.spider;
+package com.asa.ghost.weixin.spider;
 
 import com.asa.base.log.LoggerFactory;
 import com.asa.base.utils.StringUtils;
