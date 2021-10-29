@@ -1,13 +1,13 @@
 package com.asa.browser;
 
-import com.asa.browser.base.JBrowserDebugger;
-import com.asa.browser.widget.degger.element.WebElement;
-import com.asa.browser.widget.degger.selector.By;
+import com.asa.base.ui.browser.Browser;
+import com.asa.base.ui.browser.base.JBrowserDebugger;
+import com.asa.base.ui.browser.widget.degger.element.WebElement;
+import com.asa.base.ui.browser.widget.degger.selector.By;
 import com.asa.base.log.LoggerFactory;
 import com.asa.base.utils.StringUtils;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;

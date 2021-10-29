@@ -1,0 +1,92 @@
+{
+  "info": {
+    "article": {
+      "url": "https://mp.weixin.qq.com/cgi-bin/appmsg",
+      "method": "GET",
+      "verify": true,
+      "params": {
+        "action": "",
+        "begin": "int 起始页",
+        "count": "int 数量",
+        "fakeid": "int 公众号id",
+        "type": "int 9(查询公众号文章)|",
+        "query": "string 查询字符串",
+        "token": "string token凭证",
+        "lang": "string zh_CN(中文)|",
+        "f": "string json(格式化方式)|",
+        "ajax": "int 1|"
+      },
+      "comment": "公众号文章查询"
+    },
+    "article_response": {
+      "app_msg_cnt": "int 文章数量",
+      "base_resp": {
+        "err_msg": "ok or 错误信息",
+        "ret": "int 0 表示成功响应"
+      },
+      "app_msg_list": {
+        "aid": "string 文章id，同一条动态会用下划线_1,_2划分开",
+        "album_id": "string // un parse",
+        "appmsg_album_info": "[] un parse",
+        "checking": "int un parse",
+        "copyright_type": "int 0(广告|评论引用他人文章)| 1(自己创作) |2(推广)",
+        "cover": "string 封面url",
+        "create_time": "long 创建时间",
+        "digest": "string 签名，简介",
+        "has_red_packet_cover": "int un parse",
+        "is_pay_subscribe": "int un parse",
+        "item_show_type": "int un parse",
+        "itemidx": "int un parse",
+        "link": "string 文章url",
+        "media_duration": "string un parse",
+        "mediappid_publish_status": "int un parse",
+        "pay_album_info": "map un parse",
+        "tagid": "list un parse",
+        "title": "string 文章标题 "
+      },
+      "comment": "公众号文章查询响应数据结构"
+    }
+  },
+  "operate": {
+    "like": {
+      "url": "https://api.bilibili.com/x/article/like",
+      "method": "POST",
+      "verify": true,
+      "params": {
+        "id": "int: cv 号",
+        "type": "int: 1 点赞 2 取消"
+      },
+      "comment": "专栏点赞"
+    },
+    "add_favorite": {
+      "url": "https://api.bilibili.com/x/article/favorites/add",
+      "method": "POST",
+      "verify": true,
+      "params": {
+        "id": "int: cv 号"
+      },
+      "comment": "专栏收藏"
+    },
+    "del_favorite": {
+      "url": "https://api.bilibili.com/x/article/favorites/del",
+      "method": "POST",
+      "verify": true,
+      "params": {
+        "id": "int: cv 号"
+      },
+      "comment": "专栏取消收藏"
+    },
+    "coin": {
+      "url": "https://api.bilibili.com/x/web-interface/coin/add",
+      "method": "POST",
+      "verify": true,
+      "params": {
+        "aid": "int: cv 号",
+        "multiply": "int: 硬币数量，目前只能是 1 个",
+        "upid": "int: up 主的 uid",
+        "avtype": "const int: 2"
+      },
+      "comment": "专栏投币"
+    }
+  }
+}

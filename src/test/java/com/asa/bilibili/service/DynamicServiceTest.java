@@ -45,7 +45,7 @@ public class DynamicServiceTest extends TestCase {
     @Test
     public void testInstantText() throws Exception{
 
-        Map ret = service.instantText(userService.getCredential(), "春事已不及，江行复茫然");
+        Map ret = service.instantText(userService.getCredential(), "纸上得来终觉浅");
         System.out.println(ret);
     }
 

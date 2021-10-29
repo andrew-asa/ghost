@@ -3,7 +3,9 @@ package com.asa.weixin.spider.controller;
 import com.asa.base.enent.Event;
 import com.asa.base.enent.EventDispatcher;
 import com.asa.base.enent.Listener;
-import com.asa.browser.Browser;
+import com.asa.base.ui.browser.Browser;
+import com.asa.base.ui.component.Toast;
+import com.asa.base.utils.StringUtils;
 import com.asa.base.log.LoggerFactory;
 import com.asa.weixin.spider.model.WeixinArticle;
 import com.asa.weixin.spider.service.WeixinFavorArticleService;
@@ -18,8 +20,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -32,6 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**

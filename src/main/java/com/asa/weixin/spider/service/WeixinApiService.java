@@ -1,5 +1,4 @@
-package com.asa.bilibili.service;
-
+package com.asa.weixin.spider.service;
 
 import com.asa.base.utils.StringUtils;
 import com.asa.base.ui.browser.base.service.ApiService;
@@ -10,16 +9,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author andrew_asa
- * @date 2021/10/2.
+ * @date 2021/10/28.
  */
 @Component
-public class BilibiliCommonService extends ApiService {
+public class WeixinApiService extends ApiService {
 
-    public static final String API_FIELD = "com/asa/bilibili/data/api/{}.json";
+    public static final String API_FIELD = "com/asa/weixin/data/api/{}.json";
 
     public Map<String, Map> cache = new ConcurrentHashMap<>();
 
-    public BilibiliCommonService() {
+    public WeixinApiService() {
 
     }
 

@@ -45,61 +45,14 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setTray();
         installListener();
         preLoadSubViews();
         installMainPanel();
     }
 
-    private void setTray() {
-        try {
-            BufferedImage image = ImageIO.read(new ClassPathResource("com/asa/weixin/spider/img/Jarvis.png").getInputStream());
-            TrayIcon trayIcon = initTray("jarvis", image);
-            Spider.getStage().setOnCloseRequest(event -> {
-                try {
-                    if (SystemTray.isSupported())
-                        if (trayIcon != null)
-                            SystemTray.getSystemTray().remove(trayIcon);
-                } catch (Exception ignored) {
-                }
-                System.exit(0);
-            });
-        } catch (Exception e) {
 
-        }
 
-    }
 
-    private TrayIcon initTray(String appName, BufferedImage bufferedImage) throws Exception {
-        TrayIcon trayIcon = null;
-        if (SystemTray.isSupported()) {
-            SystemTray tray = SystemTray.getSystemTray();
-            //BufferedImage bufferedImage = SwingFXUtils.fromFXImage(logoImage, null);
-            PopupMenu popupMenu = new PopupMenu();
-            java.awt.MenuItem exitItem = new java.awt.MenuItem("退出");
-            exitItem.addActionListener(e -> { System.exit(0);});
-            popupMenu.add(exitItem);
-            java.awt.MenuItem back = new java.awt.MenuItem("回主页面");
-            back.addActionListener(e -> {
-                Platform.runLater(() -> {
-                    Stage stage = Spider.getStage();
-                    if(!Spider.getStage().isShowing()){
-                        stage.show();
-                    }
-                    stage.toFront();
-                });
-            });
-            popupMenu.add(back);
-            if (bufferedImage != null) {
-                trayIcon = new TrayIcon(bufferedImage, appName);
-                trayIcon.setImageAutoSize(true);
-                trayIcon.setToolTip(appName);
-                trayIcon.setPopupMenu(popupMenu);
-                tray.add(trayIcon);
-            }
-        }
-        return trayIcon;
-    }
 
     private void preLoadSubViews() {
 

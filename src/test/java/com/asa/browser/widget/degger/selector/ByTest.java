@@ -1,5 +1,6 @@
 package com.asa.browser.widget.degger.selector;
 
+import com.asa.base.ui.browser.widget.degger.selector.By;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
