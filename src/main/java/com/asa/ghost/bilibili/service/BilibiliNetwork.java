@@ -1,11 +1,11 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 import com.asa.base.utils.MapUtils;
 import com.asa.base.utils.StringUtils;
-import com.asa.bilibili.data.Credential;
-import com.asa.bilibili.lang.NoDataResponseException;
-import com.asa.bilibili.lang.RequireLoginException;
-import com.asa.bilibili.lang.ResponseCodeException;
+import com.asa.ghost.bilibili.data.Credential;
+import com.asa.ghost.bilibili.lang.NoDataResponseException;
+import com.asa.ghost.bilibili.lang.RequireLoginException;
+import com.asa.ghost.bilibili.lang.ResponseCodeException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

@@ -1,4 +1,4 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class DynamicServiceTest extends TestCase {
 
     }
 
-    @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
+    @SpringBootApplication(scanBasePackages = "com.asa.ghost.bilibili")
     static class InnerConfig {
 
     }

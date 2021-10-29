@@ -1,4 +1,4 @@
-package com.asa.bilibili.constant;
+package com.asa.ghost.bilibili.constant;
 
 /**
  * @author andrew_asa

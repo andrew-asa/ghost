@@ -1,4 +1,4 @@
-package com.asa.bilibili.data;
+package com.asa.ghost.bilibili.data;
 
 import com.asa.base.model.Cookie;
 import com.asa.base.model.Cookies;

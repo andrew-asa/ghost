@@ -1,6 +1,6 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
-import com.asa.bilibili.data.Credential;
+import com.asa.ghost.bilibili.data.Credential;
 import com.asa.base.log.LoggerFactory;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public class UserServiceTest extends TestCase {
 
     }
 
-    @SpringBootApplication(scanBasePackages = "com.asa.bilibili")
+    @SpringBootApplication(scanBasePackages = "com.asa.ghost.bilibili")
     static class InnerConfig {
 
     }

@@ -1,4 +1,4 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 import com.asa.base.utils.ObjectMapUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.asa.base.ui.browser.base.service;
+package com.asa.ghost.base.service;
 
 import com.asa.base.utils.MapUtils;
 import com.asa.base.utils.StringUtils;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author andrew_asa
- * @date 2021/10/28.
+ * @date 2021/10/29.
  */
 public abstract class ApiService {
 

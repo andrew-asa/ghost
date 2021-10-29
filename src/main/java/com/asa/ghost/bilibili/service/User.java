@@ -1,4 +1,4 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 /**
  * @author andrew_asa

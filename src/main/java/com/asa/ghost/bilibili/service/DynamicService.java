@@ -1,7 +1,7 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 import com.asa.base.utils.ObjectMapUtils;
-import com.asa.bilibili.data.Credential;
+import com.asa.ghost.bilibili.data.Credential;
 import com.asa.base.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

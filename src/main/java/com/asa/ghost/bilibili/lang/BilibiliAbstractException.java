@@ -1,4 +1,4 @@
-package com.asa.bilibili.lang;
+package com.asa.ghost.bilibili.lang;
 
 
 import com.asa.base.exception.AbstractException;

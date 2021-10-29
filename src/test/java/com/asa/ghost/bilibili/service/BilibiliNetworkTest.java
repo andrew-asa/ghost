@@ -1,6 +1,6 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
-import com.asa.bilibili.data.Credential;
+import com.asa.ghost.bilibili.data.Credential;
 import junit.framework.TestCase;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

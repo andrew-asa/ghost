@@ -1,4 +1,4 @@
-package com.asa.base.ui.browser.base.service;
+package com.asa.ghost.base.service;
 
 import com.asa.base.utils.MapUtils;
 import org.springframework.http.HttpEntity;

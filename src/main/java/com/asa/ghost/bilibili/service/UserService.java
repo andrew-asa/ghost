@@ -1,4 +1,4 @@
-package com.asa.bilibili.service;
+package com.asa.ghost.bilibili.service;
 
 import com.asa.base.utils.MapUtils;
 import com.asa.base.utils.ObjectMapUtils;
@@ -7,8 +7,8 @@ import com.asa.base.utils.StringUtils;
 import com.asa.base.utils.io.FileSystemResource;
 import com.asa.base.utils.io.IOUtils;
 import com.asa.base.utils.io.Resource;
-import com.asa.bilibili.constant.Constant;
-import com.asa.bilibili.data.Credential;
+import com.asa.ghost.bilibili.constant.Constant;
+import com.asa.ghost.bilibili.data.Credential;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.asa.bilibili.constant.Constant.Page.DEFAULT_FOLLOWINGS_PAGE_SIZE;
+import static com.asa.ghost.bilibili.constant.Constant.Page.DEFAULT_FOLLOWINGS_PAGE_SIZE;
 
 /**
  * @author andrew_asa
