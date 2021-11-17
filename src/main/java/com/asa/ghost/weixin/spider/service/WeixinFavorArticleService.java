@@ -2,6 +2,8 @@ package com.asa.ghost.weixin.spider.service;
 
 import com.asa.base.log.LoggerFactory;
 import com.asa.ghost.weixin.spider.model.WeixinArticle;
+import com.asa.ghost.weixin.spider.model.db.WeixinBookMarksDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
 @Component
 public class WeixinFavorArticleService {
 
+    @Autowired
+    private WeixinBookMarksDao bookMarksDao;
+
     public WeixinFavorArticleService() {
 
     }
@@ -25,6 +30,13 @@ public class WeixinFavorArticleService {
         List<String> folders = new ArrayList<>();
         folders.add(ROOT);
         return folders;
+    }
+
+    /**
+     * 生成目录
+     */
+    public void createBookMarkDir() {
+
     }
 
 

@@ -9,8 +9,9 @@ import java.io.Serializable;
 /**
  * @author andrew_asa
  * @date 2020/11/26.
+ * 书签
  */
 @Repository
-public interface FavorArticleDao extends JpaRepository<FavorArticleEntity, String>, JpaSpecificationExecutor<FavorArticleEntity>, Serializable {
+public interface WeixinBookMarksDao extends JpaRepository<WeixinBookMarksEntity, String>, JpaSpecificationExecutor<WeixinBookMarksEntity>, Serializable {
 
 }

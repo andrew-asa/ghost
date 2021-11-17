@@ -5,8 +5,7 @@ import com.asa.base.enent.Listener;
 import com.asa.base.log.LoggerFactory;
 import com.asa.base.utils.ListUtils;
 import com.asa.base.utils.StringUtils;
-import com.asa.ghost.weixin.spider.Spider;
-import com.asa.ghost.weixin.spider.view.ArticleListPaneView;
+import com.asa.ghost.weixin.spider.WeixinSpider;
 import com.asa.ghost.weixin.spider.view.FavorAccountsView;
 import com.asa.ghost.weixin.spider.view.SearchPresentView;
 import com.asa.ghost.weixin.spider.view.SubViewContent;
@@ -122,7 +121,7 @@ public class HomePagePaneController implements Initializable {
     private void createSearchPopup() {
 
         try {
-            Stage stage = Spider.getStage();
+            Stage stage = WeixinSpider.getStage();
             searchPopupView = new VBox();
             Stage popup = new Stage();
             popup.setScene(new Scene(searchPopupView));
@@ -248,7 +247,7 @@ public class HomePagePaneController implements Initializable {
 
         if (!searchPopup.isShowing()) {
             searchPopupView.getChildren().removeAll();
-            Stage stage = Spider.getStage();
+            Stage stage = WeixinSpider.getStage();
             searchPopup.setX(stage.getX());
             searchPopup.setY(stage.getY() + 80);
             searchPopup.show();

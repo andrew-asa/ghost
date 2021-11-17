@@ -6,29 +6,19 @@ import com.asa.base.enent.Listener;
 
 import com.asa.base.log.LoggerFactory;
 import com.asa.base.utils.StringUtils;
-import com.asa.ghost.weixin.spider.Spider;
+import com.asa.ghost.weixin.spider.WeixinSpider;
 import com.asa.ghost.weixin.spider.view.HomePagePaneView;
 import com.asa.ghost.weixin.spider.view.MainViewContent;
 
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 
-import javax.imageio.ImageIO;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -107,8 +97,8 @@ public class MainController implements Initializable {
             EventDispatcher.fire(MainPanelEvent.BEFORE_INSTALL, viewName);
             mainWindow.setCenter(view);
             LoggerFactory.getLogger().debug(this.getClass(),"install {}",viewName);
-            Spider.getStage().setHeight(((Pane) view).getPrefHeight());
-            Spider.getStage().setWidth(((Pane) view).getPrefWidth());
+            WeixinSpider.getStage().setHeight(((Pane) view).getPrefHeight());
+            WeixinSpider.getStage().setWidth(((Pane) view).getPrefWidth());
             ((Pane) view).prefWidthProperty().bind(mainWindow.widthProperty());
             ((Pane) view).prefHeightProperty().bind(mainWindow.heightProperty());
             EventDispatcher.fire(MainPanelEvent.AFTER_INSTALL, viewName);

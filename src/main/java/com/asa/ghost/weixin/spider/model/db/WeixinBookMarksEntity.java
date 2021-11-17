@@ -12,11 +12,11 @@ import java.util.StringJoiner;
 /**
  * @author andrew_asa
  * @date 2020/11/26.
- * 收藏文章
+ * 收藏文章书签
  */
 @Entity
-@Table(name = "favor_article")
-public class FavorArticleEntity {
+@Table(name = "weixin_book_marks")
+public class WeixinBookMarksEntity {
 
     /**
      * id
@@ -28,13 +28,13 @@ public class FavorArticleEntity {
 
 
     /**
-     * 微信号
+     * 文章名字
      */
     @Column
     private String name;
 
     /**
-     * 微信名字
+     * 目录id
      */
     @Column
     private String parent;
@@ -44,6 +44,9 @@ public class FavorArticleEntity {
 
     @Column
     private String tags;
+
+    @Column
+    private boolean folder;
 
     public String getId() {
 
@@ -83,5 +86,25 @@ public class FavorArticleEntity {
     public void setUrl(String url) {
 
         this.url = url;
+    }
+
+    public String getTags() {
+
+        return tags;
+    }
+
+    public void setTags(String tags) {
+
+        this.tags = tags;
+    }
+
+    public boolean isFolder() {
+
+        return folder;
+    }
+
+    public void setFolder(boolean folder) {
+
+        this.folder = folder;
     }
 }

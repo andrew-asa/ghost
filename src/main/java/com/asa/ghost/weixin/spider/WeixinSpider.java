@@ -6,9 +6,7 @@ import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.io.ClassPathResource;
 
-import javax.imageio.ImageIO;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
@@ -19,12 +17,11 @@ import java.awt.image.BufferedImage;
  * @date 2021/3/26.
  */
 @SpringBootApplication(scanBasePackages = "com.asa.ghost.weixin.spider")
-public class Spider extends AbstractJavaFxApplicationSupport {
+public class WeixinSpider extends AbstractJavaFxApplicationSupport {
 
     public static void main(String[] args) {
 
-        launch(Spider.class, MainView.class, new SplashScreenCustom(), args);
-
+        launch(WeixinSpider.class, MainView.class, new SplashScreenCustom(), args);
     }
 
     public void start(final Stage stage) throws Exception {
@@ -71,8 +68,8 @@ public class Spider extends AbstractJavaFxApplicationSupport {
             java.awt.MenuItem back = new java.awt.MenuItem("回主页面");
             back.addActionListener(e -> {
                 Platform.runLater(() -> {
-                    Stage stage = Spider.getStage();
-                    if (!Spider.getStage().isShowing()) {
+                    Stage stage = WeixinSpider.getStage();
+                    if (!WeixinSpider.getStage().isShowing()) {
                         stage.show();
                     }
                     stage.toFront();
