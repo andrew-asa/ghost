@@ -10,7 +10,7 @@ import com.asa.ghost.weixin.spider.WeixinSpider;
 import com.asa.ghost.weixin.spider.view.HomePagePaneView;
 import com.asa.ghost.weixin.spider.view.MainViewContent;
 
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -14,7 +14,7 @@ import com.asa.ghost.weixin.spider.view.WeixinArticleReadView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

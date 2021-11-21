@@ -9,7 +9,7 @@ import com.asa.ghost.weixin.spider.model.WeixinPublicAccount;
 import com.asa.ghost.weixin.spider.service.WeixinFavorAccountsService;
 import com.asa.ghost.weixin.spider.service.WeixinSearchService;
 import com.asa.ghost.weixin.spider.view.FavorAccountsView;
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

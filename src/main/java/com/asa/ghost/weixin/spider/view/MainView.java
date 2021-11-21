@@ -1,7 +1,7 @@
 package com.asa.ghost.weixin.spider.view;
 
-import de.felixroske.jfxsupport.AbstractFxmlView;
-import de.felixroske.jfxsupport.FXMLView;
+import com.asa.base.ui.jfxsupport.AbstractFxmlView;
+import com.asa.base.ui.jfxsupport.FXMLView;
 
 /**
  * @author andrew_asa

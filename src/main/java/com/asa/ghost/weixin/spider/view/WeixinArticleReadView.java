@@ -1,11 +1,8 @@
 package com.asa.ghost.weixin.spider.view;
 
-import com.asa.base.enent.Event;
+import com.asa.base.ui.jfxsupport.AbstractFxmlView;
+import com.asa.base.ui.jfxsupport.FXMLView;
 import com.asa.base.utils.StringUtils;
-import com.asa.ghost.weixin.spider.controller.SearchItem;
-import com.asa.ghost.weixin.spider.model.WeixinArticle;
-import de.felixroske.jfxsupport.AbstractFxmlView;
-import de.felixroske.jfxsupport.FXMLView;
 
 /**
  * @author andrew_asa

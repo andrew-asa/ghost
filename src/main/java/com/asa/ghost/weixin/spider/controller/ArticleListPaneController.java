@@ -15,7 +15,7 @@ import com.asa.ghost.weixin.spider.service.WeixinSearchService;
 import com.asa.base.ui.component.Toast;
 import com.asa.ghost.weixin.spider.view.ArticleListPaneView;
 import com.asa.ghost.weixin.spider.view.FavorAccountsView;
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;

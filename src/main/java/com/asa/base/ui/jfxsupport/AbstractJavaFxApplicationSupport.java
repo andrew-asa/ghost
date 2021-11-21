@@ -363,10 +363,10 @@ public abstract class AbstractJavaFxApplicationSupport extends Application {
     }
 
     public Collection<Image> loadDefaultIcons() {
-        return Arrays.asList(new Image(getClass().getResource("/icons/gear_16x16.png").toExternalForm()),
-                             new Image(getClass().getResource("/icons/gear_24x24.png").toExternalForm()),
-                             new Image(getClass().getResource("/icons/gear_36x36.png").toExternalForm()),
-                             new Image(getClass().getResource("/icons/gear_42x42.png").toExternalForm()),
-                             new Image(getClass().getResource("/icons/gear_64x64.png").toExternalForm()));
+        return Arrays.asList(new Image(AbstractJavaFxApplicationSupport.class.getResource("./icons/gear_16x16.png").toExternalForm()),
+                             new Image(AbstractJavaFxApplicationSupport.class.getResource("./icons/gear_24x24.png").toExternalForm()),
+                             new Image(AbstractJavaFxApplicationSupport.class.getResource("./icons/gear_36x36.png").toExternalForm()),
+                             new Image(AbstractJavaFxApplicationSupport.class.getResource("./icons/gear_42x42.png").toExternalForm()),
+                             new Image(AbstractJavaFxApplicationSupport.class.getResource("./icons/gear_64x64.png").toExternalForm()));
     }
 }

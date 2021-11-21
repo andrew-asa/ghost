@@ -10,7 +10,7 @@ import com.asa.ghost.weixin.spider.view.FavorAccountsView;
 import com.asa.ghost.weixin.spider.view.SearchPresentView;
 import com.asa.ghost.weixin.spider.view.SubViewContent;
 import com.asa.ghost.weixin.spider.view.WeixinPublicAccountSearchView;
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;

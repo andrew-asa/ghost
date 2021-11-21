@@ -2,7 +2,7 @@ package com.asa.ghost.weixin.spider;
 
 import com.asa.ghost.weixin.spider.view.MainView;
 import com.asa.ghost.weixin.spider.view.SplashScreenCustom;
-import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
+import com.asa.base.ui.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

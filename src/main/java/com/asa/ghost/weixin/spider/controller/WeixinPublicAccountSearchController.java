@@ -6,7 +6,7 @@ import com.asa.base.enent.Listener;
 import com.asa.base.log.LoggerFactory;
 import com.asa.ghost.weixin.spider.model.WeixinPublicAccount;
 import com.asa.ghost.weixin.spider.service.WeixinSearchService;
-import de.felixroske.jfxsupport.FXMLController;
+import com.asa.base.ui.jfxsupport.FXMLController;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.css.PseudoClass;
