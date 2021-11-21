@@ -46,47 +46,5 @@
       },
       "comment": "公众号文章查询响应数据结构"
     }
-  },
-  "operate": {
-    "like": {
-      "url": "https://api.bilibili.com/x/article/like",
-      "method": "POST",
-      "verify": true,
-      "params": {
-        "id": "int: cv 号",
-        "type": "int: 1 点赞 2 取消"
-      },
-      "comment": "专栏点赞"
-    },
-    "add_favorite": {
-      "url": "https://api.bilibili.com/x/article/favorites/add",
-      "method": "POST",
-      "verify": true,
-      "params": {
-        "id": "int: cv 号"
-      },
-      "comment": "专栏收藏"
-    },
-    "del_favorite": {
-      "url": "https://api.bilibili.com/x/article/favorites/del",
-      "method": "POST",
-      "verify": true,
-      "params": {
-        "id": "int: cv 号"
-      },
-      "comment": "专栏取消收藏"
-    },
-    "coin": {
-      "url": "https://api.bilibili.com/x/web-interface/coin/add",
-      "method": "POST",
-      "verify": true,
-      "params": {
-        "aid": "int: cv 号",
-        "multiply": "int: 硬币数量，目前只能是 1 个",
-        "upid": "int: up 主的 uid",
-        "avtype": "const int: 2"
-      },
-      "comment": "专栏投币"
-    }
   }
 }

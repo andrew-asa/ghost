@@ -20,9 +20,19 @@ public class NetworkService {
 
     public <T> T GET(String url,
                      Map<String, Object> params,
+                     Class<T> responseTyp){
+
+        return GET(createDefaultHeader(),
+                   url,
+                   params,
+                   responseTyp);
+    }
+
+    public <T> T GET(HttpHeaders headers,
+                     String url,
+                     Map<String, Object> params,
                      Class<T> responseTyp) {
 
-        HttpHeaders headers = createDefaultHeader();
         if (params == null) {
             params = new HashMap<>();
         }
@@ -34,17 +44,6 @@ public class NetworkService {
                           responseTyp, params);
         T body = res.getBody();
         return body;
-    }
-
-    public <T> T GET(String url,
-                     Class<T> responseTyp){
-
-        return GET(url, null, responseTyp);
-    }
-
-    public String GET(String url,
-                     Map<String, Object> params){
-        return GET(url,params,String.class);
     }
 
     public static String addURIVariables(String url, String... uriVariables) {
@@ -60,7 +59,7 @@ public class NetworkService {
         return ret.toString();
     }
 
-    private HttpHeaders createDefaultHeader() {
+    protected HttpHeaders createDefaultHeader() {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.USER_AGENT,

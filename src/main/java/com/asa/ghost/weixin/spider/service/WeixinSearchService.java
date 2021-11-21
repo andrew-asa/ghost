@@ -4,6 +4,7 @@ import com.asa.base.utils.ListUtils;
 import com.asa.base.utils.MapBuilder;
 import com.asa.base.utils.MapUtils;
 import com.asa.base.utils.StringUtils;
+import com.asa.ghost.base.service.ApiService;
 import com.asa.ghost.weixin.spider.model.WeixinArticle;
 import com.asa.ghost.weixin.spider.model.WeixinArticlesInfo;
 import com.asa.ghost.weixin.spider.model.WeixinPublicAccount;
@@ -39,7 +40,15 @@ public class WeixinSearchService {
      */
     public static final String ARTICLE_SEARCH_URL = "https://mp.weixin.qq.com/cgi-bin/appmsg?action={action}&begin={begin}&count={count}&fakeid={fakeid}&type={type}&query={query}&token={token}&lang={lang}&f={f}&ajax={ajax}";
 
+    public static int SEARCH_ARTICLE_TYPE = 9;
+
     private RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    private WeixinApiService apiService;
+
+    @Autowired
+    private WeixinNetworkService networkService;
 
     /**
      * 每页显示多少条数据
@@ -100,11 +109,6 @@ public class WeixinSearchService {
                 weixinArticlesInfo.addArticles(ar.subList(0, ti));
             }
         }
-        //try {
-        //    System.out.println(new ObjectMapper().writeValueAsString(weixinArticlesInfo));
-        //} catch (Exception e) {
-        //
-        //}
         return weixinArticlesInfo;
     }
 
@@ -172,28 +176,34 @@ public class WeixinSearchService {
                                             String query,
                                             int begin, int count) {
 
+        return searchArticle(apiService,
+                             token, cookie,
+                             fakeId, query,
+                             begin, count);
+
+    }
+
+    public WeixinArticlesInfo searchArticle(ApiService apiService,
+                                            String token, String cookie,
+                                            String fakeId,
+                                            String query,
+                                            int begin, int count) {
+
         Map<String, Object> params = new MapBuilder()
                 .add("action", "list_ex")
                 .add("begin", begin)
                 .add("count", count)
                 .add("fakeid", fakeId)
-                .add("type", 9)
+                .add("type", SEARCH_ARTICLE_TYPE)
                 .add("query", query)
                 .add("token", token)
                 .add("lang", "zh_CN")
                 .add("f", "json")
                 .add("ajax", "1")
                 .build();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.USER_AGENT,
-                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36");
-        headers.set("cookie", cookie);
-        // 注意几个请求参数
-        HttpEntity<Map> res = restTemplate
-                .exchange(ARTICLE_SEARCH_URL, HttpMethod.GET, new HttpEntity<Map>(null, headers),
-                          Map.class, params);
-        Map body = res.getBody();
-        return parseSearchArticleResult(body);
+        String url = apiService.getApiString("article", "info", "article", "url");
+        Map res = networkService.GET(cookie, url, params, Map.class);
+        return parseSearchArticleResult(res);
     }
 
     /**
@@ -284,15 +294,8 @@ public class WeixinSearchService {
                 .add("f", "json")
                 .add("ajax", "1")
                 .build();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.USER_AGENT,
-                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36");
-        headers.set("cookie", cookie);
-        // 注意几个请求参数
-        HttpEntity<Map> res = restTemplate
-                .exchange(ACCOUNT_SEARCH_URL, HttpMethod.GET, new HttpEntity<Map>(null, headers),
-                          Map.class, params);
-        Map body = res.getBody();
+        String url = apiService.getApiString("account", "info", "public_account", "url");
+        Map body = networkService.GET(cookie, url, params, Map.class);
         return parseSearchPublicAccountResult(body);
     }
 
@@ -324,5 +327,35 @@ public class WeixinSearchService {
         accountList.add(WeixinPublicAccount.create("政事堂pro2019", "zhengshitang2019", "http://mmbiz.qpic.cn/mmbiz_png/zyEYFkZWMFgesd1TyKysLrtNBZ9lqbsuhVDXJOSRbSjSwjCDYg47UnqKpaS5yTYPAruVbzOs31uf2Bv2Dle2aA/0?wx_fmt=png", "1"));
         accountList.add(WeixinPublicAccount.create("求实处", "", "http://mmbiz.qpic.cn/mmbiz_png/hr6mUjEf2jaa8tz3bBGpZl2HuHBePdpflnvbVsEnkbwVmGG1HZkuU5XSA5WwcuNB6sX4L0dr6b9qy5q52w3GzA/0?wx_fmt=png", "1"));
         return accountList;
+    }
+
+    public WeixinApiService getApiService() {
+
+        return apiService;
+    }
+
+    public void setApiService(WeixinApiService apiService) {
+
+        this.apiService = apiService;
+    }
+
+    public WeixinLoginService getLoginService() {
+
+        return loginService;
+    }
+
+    public void setLoginService(WeixinLoginService loginService) {
+
+        this.loginService = loginService;
+    }
+
+    public WeixinNetworkService getNetworkService() {
+
+        return networkService;
+    }
+
+    public void setNetworkService(WeixinNetworkService networkService) {
+
+        this.networkService = networkService;
     }
 }

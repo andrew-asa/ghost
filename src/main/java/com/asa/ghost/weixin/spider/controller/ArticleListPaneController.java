@@ -415,6 +415,7 @@ public class ArticleListPaneController implements Initializable {
         String j = jumpToPageNumber.getText();
         if (!NumberUtils.isDigits(j)) {
             LoggerFactory.getLogger().debug(this.getClass(),"填充的不是数字 {}",j);
+            return;
         }
        // todo 需要进一步操作，先不进行
         int ji = Integer.parseInt(j);

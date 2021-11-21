@@ -1,0 +1,20 @@
+{
+  "info": {
+    "public_account": {
+      "url": "https://mp.weixin.qq.com/cgi-bin/searchbiz",
+      "method": "GET",
+      "verify": true,
+      "params": {
+        "action": "",
+        "begin": "int 起始页",
+        "count": "int 数量",
+        "query": "string 查询字符串",
+        "token": "string token凭证",
+        "lang": "string zh_CN(中文)|",
+        "f": "string json(格式化方式)|",
+        "ajax": "int 1|"
+      },
+      "comment": "公众号查询"
+    }
+  }
+}
