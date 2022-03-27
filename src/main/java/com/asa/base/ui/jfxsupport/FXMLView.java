@@ -39,4 +39,10 @@ public @interface FXMLView {
      * when using this view as a modal window.
      */
     String stageStyle() default "UTILITY";
+
+    /**
+     * 控制类
+     * @return
+     */
+    String controller() default "";
 }

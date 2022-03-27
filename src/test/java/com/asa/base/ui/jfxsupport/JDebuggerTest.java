@@ -1,45 +1,61 @@
-package com.asa.ghost.weixin.spider;
+package com.asa.base.ui.jfxsupport;
 
-import com.asa.base.ui.jfxsupport.GUIState;
 import com.asa.base.ui.jfxsupport.debugger.DebuggerController;
 import com.asa.base.utils.io.ClassPathResource;
+import com.asa.ghost.weixin.spider.WeixinSpider;
 import com.asa.ghost.weixin.spider.view.MainView;
 import com.asa.ghost.weixin.spider.view.SplashScreenCustom;
-import com.asa.base.ui.jfxsupport.AbstractJavaFxApplicationSupport;
+import com.jfoenix.controls.JFXButton;
+import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.imageio.ImageIO;
-import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import java.io.IOException;
 
 /**
  * @author andrew_asa
- * @date 2021/3/26.
+ * @date 2021/11/23.
  */
-@SpringBootApplication(scanBasePackages = {
-        "com.asa.ghost.weixin.spider",
-        "com.asa.base.ui"}
-)
-public class WeixinSpider extends AbstractJavaFxApplicationSupport {
+public class JDebuggerTest extends Application {
 
-    public static void main(String[] args) {
+    private DebuggerController debugger;
 
-        launch(WeixinSpider.class, MainView.class, new SplashScreenCustom(), args);
-    }
+    private Stage stage;
+
+    private Scene scene;
+
+    private StackPane stackPane;
 
     public void start(final Stage stage) throws Exception {
 
-        super.start(stage);
+        this.stage = stage;
+        stage.setTitle("JDebuggerTest");
+        stackPane = new StackPane();
+        HBox root = new HBox();
+        stackPane.getChildren().add(root);
+        JFXButton button = new JFXButton("test");
+        root.getChildren().add(button);
+
+        scene = new Scene(stackPane, 300, 250, Color.WHITE);
+        stage.setScene(scene);
         setOnClose(stage);
+        initDebugger(stage, scene, stackPane);
+        setSystemTray(stage);
+        stage.show();
     }
 
-    public void beforeInitialView(final Stage stage, final ConfigurableApplicationContext ctx) {
+    private void initDebugger(Stage stage, Scene scene, StackPane root) {
 
-        super.beforeInitialView(stage, ctx);
-        setSystemTray(stage, ctx);
+        debugger = new DebuggerController();
+        debugger.init(stage, scene, root);
     }
 
     private void setOnClose(Stage stage) {
@@ -61,7 +77,7 @@ public class WeixinSpider extends AbstractJavaFxApplicationSupport {
 
     java.awt.TrayIcon trayIcon;
 
-    private void setSystemTray(final Stage stage, final ConfigurableApplicationContext ctx) {
+    private void setSystemTray(final Stage stage) {
 
         try {
             java.awt.Toolkit.getDefaultToolkit();
@@ -82,13 +98,13 @@ public class WeixinSpider extends AbstractJavaFxApplicationSupport {
             exitItem.addActionListener(event -> {
                 onClose();
             });
-            java.awt.MenuItem debugger = ctx.getBean(DebuggerController.class).createDebuggerMenu("调试","退出调试");
+            java.awt.MenuItem debuggerM = debugger.createDebuggerMenu("调试", "退出调试");
             final java.awt.PopupMenu popup = new java.awt.PopupMenu();
             popup.add(openItem);
             popup.addSeparator();
             popup.add(exitItem);
             popup.addSeparator();
-            popup.add(debugger);
+            popup.add(debuggerM);
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } catch (java.awt.AWTException | IOException e) {

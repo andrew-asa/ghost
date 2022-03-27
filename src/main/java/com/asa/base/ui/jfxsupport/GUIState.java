@@ -2,6 +2,7 @@ package com.asa.base.ui.jfxsupport;
 
 import javafx.application.HostServices;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.awt.SystemTray;

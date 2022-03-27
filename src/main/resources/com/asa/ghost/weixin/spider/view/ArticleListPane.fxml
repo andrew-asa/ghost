@@ -247,6 +247,7 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <HBox fx:id="articleSettingBox" layoutX="710.0" layoutY="10.0" prefHeight="50.0" />
                            </children>
                         </HBox>
                      </children>
